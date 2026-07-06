@@ -12,4 +12,13 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
   },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        // Design tokens and media-query mixins are available in every
+        // component <style> without an explicit @use.
+        additionalData: '@use "@/styles/variables" as *;\n@use "@/styles/mixins" as *;\n',
+      },
+    },
+  },
 })
