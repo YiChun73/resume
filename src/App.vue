@@ -1,7 +1,14 @@
 <script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
+import AppPreloader from '@/components/layout/AppPreloader.vue'
+import BackToTopButton from '@/components/layout/BackToTopButton.vue'
+import FooterSection from '@/components/layout/FooterSection.vue'
+import SiteNavbar from '@/components/layout/SiteNavbar.vue'
 </script>
 
 <template>
-  <HelloWorld />
+  <AppPreloader />
+  <SiteNavbar />
+  <RouterView />
+  <FooterSection />
+  <BackToTopButton />
 </template>
