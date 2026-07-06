@@ -1,0 +1,41 @@
+// Global design tokens. Colors are managed exclusively through CSS variables.
+:root {
+  // Brand palette
+  --color-primary: #ff4c60; // pink/red accent, links, buttons
+  --color-secondary: #6c6ce5; // purple, portfolio mask, badges
+  --color-yellow: #ffd15c; // yellow accent, nav hover, skill bar
+  --color-teal: #44d7b6; // teal parallax shapes
+
+  // Neutrals
+  --color-dark: #353353; // dark sections, header, footer
+  --color-heading: #454360;
+  --color-text: #5e5c7f;
+  --color-muted: #8b88b1; // meta text, subtitles
+  --color-soft: #9c9ab3; // copyright
+  --color-bg: #f9f9ff;
+  --color-surface: #ffffff;
+  --color-track: #f1f1f1; // progress bar track
+  --color-placeholder: #aeacca;
+  --color-icon-muted: #dedeea; // fact icons
+  --color-dot: #d4d4ff; // carousel dots
+
+  // Service card backgrounds
+  --color-service-blue: #6c6ce5;
+  --color-service-yellow: #f9d74c;
+  --color-service-pink: #f97b8b;
+
+  --color-border-on-dark: rgba(255, 255, 255, 0.1);
+
+  // Shadows
+  --shadow-card: 0px 5px 20px 0px rgba(69, 67, 96, 0.1);
+  --shadow-blue: 0px 5px 20px 0px rgba(108, 108, 229, 0.5);
+  --shadow-pink: 0px 5px 20px 0px rgba(249, 123, 139, 0.5);
+  --shadow-yellow: 0px 5px 20px 0px rgba(249, 215, 76, 0.5);
+
+  // Shape & motion
+  --radius-card: 20px;
+  --radius-pill: 30px;
+  --transition-base: all 0.3s ease-in-out;
+
+  --font-sans: 'Rubik', -apple-system, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+}

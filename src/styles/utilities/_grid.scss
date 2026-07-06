@@ -1,0 +1,80 @@
+@use '../variables' as *;
+@use '../mixins' as *;
+
+.container {
+  width: 100%;
+  padding-right: $gutter;
+  padding-left: $gutter;
+  margin-right: auto;
+  margin-left: auto;
+
+  @include media-up(sm) {
+    max-width: $container-sm;
+  }
+
+  @include media-up(md) {
+    max-width: $container-md;
+  }
+
+  @include media-up(xxl) {
+    max-width: $container-xxl;
+  }
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -$gutter;
+  margin-left: -$gutter;
+}
+
+[class*='col-'] {
+  position: relative;
+  width: 100%;
+  padding-right: $gutter;
+  padding-left: $gutter;
+}
+
+.col-6 {
+  flex: 0 0 50%;
+  max-width: 50%;
+}
+
+@include media-up(sm) {
+  .col-sm-6 {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+}
+
+@include media-up(md) {
+  .col-md-3 {
+    flex: 0 0 25%;
+    max-width: 25%;
+  }
+
+  .col-md-4 {
+    flex: 0 0 33.33333%;
+    max-width: 33.33333%;
+  }
+
+  .col-md-6 {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+
+  .col-md-8 {
+    flex: 0 0 66.66667%;
+    max-width: 66.66667%;
+  }
+
+  .col-md-9 {
+    flex: 0 0 75%;
+    max-width: 75%;
+  }
+
+  .col-md-12 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+}

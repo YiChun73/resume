@@ -1,0 +1,20 @@
+// SCSS-only tokens (values needed at compile time: media queries, grid math).
+// Runtime color tokens live as CSS custom properties in base/_root.scss.
+
+$breakpoints: (
+  xs: 375px,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1366px,
+);
+
+$gutter: 15px;
+
+$container-sm: 540px;
+$container-md: 920px;
+$container-xxl: 1080px;
+
+// Height of the fixed top navbar (20px padding * 2 + 33px logo + 1px border).
+$navbar-height: 74px;

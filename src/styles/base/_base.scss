@@ -1,0 +1,57 @@
+body {
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.7;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--color-heading);
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 20px 0;
+}
+
+h1 {
+  font-size: 36px;
+}
+
+h2 {
+  font-size: 28px;
+}
+
+h3 {
+  font-size: 24px;
+}
+
+h4 {
+  font-size: 18px;
+}
+
+p {
+  margin: 0 0 1rem;
+}
+
+a {
+  color: var(--color-primary);
+  outline: 0;
+  transition: var(--transition-base);
+
+  &:hover {
+    color: var(--color-dark);
+  }
+}
+
+section {
+  padding-top: 110px;
+  position: relative;
+}

@@ -1,0 +1,12 @@
+// Global stylesheet entry. `variables` and `mixins` are injected everywhere
+// through Vite's `additionalData`, so they are not re-imported here.
+@use 'base/fonts';
+@use 'base/root';
+@use 'base/reset';
+@use 'base/base';
+@use 'components/buttons';
+@use 'components/forms';
+@use 'components/section-title';
+@use 'utilities/grid';
+@use 'utilities/utilities';
+@use 'utilities/animations';

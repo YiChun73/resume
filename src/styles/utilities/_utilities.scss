@@ -1,0 +1,95 @@
+@use '../mixins' as *;
+
+.text-center {
+  text-align: center;
+}
+
+.list-inline {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.list-inline-item {
+  display: inline-block;
+}
+
+.rounded {
+  border-radius: var(--radius-card) !important;
+}
+
+.bg-white {
+  background: var(--color-surface);
+}
+
+.padding-30 {
+  padding: 30px;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.shadow-dark {
+  box-shadow: var(--shadow-card);
+}
+
+.shadow-blue {
+  box-shadow: var(--shadow-blue);
+}
+
+.shadow-pink {
+  box-shadow: var(--shadow-pink);
+}
+
+.shadow-yellow {
+  box-shadow: var(--shadow-yellow);
+}
+
+.visually-hidden {
+  @include visually-hidden;
+}
+
+// Speech-bubble arrows for white cards
+.triangle-top::before {
+  content: '';
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid var(--color-surface);
+  position: absolute;
+  left: 50%;
+  top: -10px;
+  transform: translateX(-7.5px);
+}
+
+// Arrow on the left edge (desktop) that flips to the top edge on small screens.
+.triangle-left-md::before {
+  @include media-up(md) {
+    content: '';
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-right: 15px solid var(--color-surface);
+    position: absolute;
+    left: 0;
+    top: 20%;
+  }
+}
+
+.triangle-top-sm::before {
+  @include media-down(md) {
+    content: '';
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid var(--color-surface);
+    position: absolute;
+    left: 50%;
+    top: -10px;
+    transform: translateX(-7.5px);
+  }
+}
