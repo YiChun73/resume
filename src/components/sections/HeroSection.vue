@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { useTemplateRef } from 'vue'
 
 import SocialLinks from '@/components/ui/SocialLinks.vue'
 import { useMouseParallax } from '@/composables/useMouseParallax'
@@ -8,7 +8,7 @@ import { useTextRotator } from '@/composables/useTextRotator'
 import { profile } from '@/data/profile'
 import { socialLinks } from '@/data/social'
 
-const scene = ref<HTMLElement | null>(null)
+const scene = useTemplateRef<HTMLElement>('scene')
 const role = useTextRotator(profile.roles)
 const { scrollToSection } = useSmoothScroll()
 

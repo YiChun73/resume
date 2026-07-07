@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, nextTick, onBeforeUnmount, ref, watch } from 'vue'
+import { computed, nextTick, onBeforeUnmount, ref, useTemplateRef, watch } from 'vue'
 
 import AppIcon from '@/components/ui/AppIcon.vue'
 import type { PortfolioItem } from '@/data/portfolio'
@@ -12,7 +12,8 @@ const emit = defineEmits<{
   close: []
 }>()
 
-const closeButton = ref<HTMLButtonElement | null>(null)
+const dialog = useTemplateRef<HTMLDivElement>('dialog')
+const closeButton = useTemplateRef<HTMLButtonElement>('closeButton')
 const galleryIndex = ref(0)
 
 const media = computed(() => props.item?.media ?? null)
@@ -32,10 +33,30 @@ function previous(): void {
     (galleryIndex.value - 1 + galleryImages.value.length) % galleryImages.value.length
 }
 
+function trapFocus(event: KeyboardEvent): void {
+  if (!dialog.value) return
+  const focusables = Array.from(
+    dialog.value.querySelectorAll<HTMLElement>(
+      'a[href], button, iframe, [tabindex]:not([tabindex="-1"])',
+    ),
+  )
+  const first = focusables[0]
+  const last = focusables[focusables.length - 1]
+  if (!first || !last) return
+  if (event.shiftKey && document.activeElement === first) {
+    event.preventDefault()
+    last.focus()
+  } else if (!event.shiftKey && document.activeElement === last) {
+    event.preventDefault()
+    first.focus()
+  }
+}
+
 function onKeydown(event: KeyboardEvent): void {
   if (event.key === 'Escape') emit('close')
   if (event.key === 'ArrowRight') next()
   if (event.key === 'ArrowLeft') previous()
+  if (event.key === 'Tab') trapFocus(event)
 }
 
 watch(
@@ -65,6 +86,7 @@ onBeforeUnmount(() => {
     <Transition name="lightbox">
       <div
         v-if="item && media"
+        ref="dialog"
         class="lightbox"
         role="dialog"
         aria-modal="true"

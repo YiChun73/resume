@@ -12,11 +12,11 @@ const props = withDefaults(
   { size: '1em' },
 )
 
-const modules = import.meta.glob('@/assets/icons/*.svg', {
+const modules = import.meta.glob<string>('@/assets/icons/*.svg', {
   query: '?raw',
   import: 'default',
   eager: true,
-}) as Record<string, string>
+})
 
 const registry = new Map<string, string>()
 for (const [path, svg] of Object.entries(modules)) {

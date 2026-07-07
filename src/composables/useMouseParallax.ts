@@ -13,7 +13,7 @@ interface ParallaxLayer {
  * `data-depth` attribute drift against the pointer, eased with rAF lerp
  * (replaces the original parallax.js `relativeInput` behaviour).
  */
-export function useMouseParallax(scene: Ref<HTMLElement | null>): void {
+export function useMouseParallax(scene: Readonly<Ref<HTMLElement | null>>): void {
   let layers: ParallaxLayer[] = []
   let targetX = 0
   let targetY = 0

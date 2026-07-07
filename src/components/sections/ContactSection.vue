@@ -20,18 +20,22 @@ const sent = ref(false)
 const info = useTemplateRef<HTMLDivElement>('info')
 const infoVisible = useInView(info)
 
+const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+
 function validate(): boolean {
-  errors.name = form.name.trim() ? undefined : 'Name is required.'
-  errors.subject = form.subject.trim() ? undefined : 'Subject is required.'
-  errors.message = form.message.trim() ? undefined : 'Message is required.'
-  if (!form.email.trim()) {
-    errors.email = 'Email is required.'
-  } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) {
-    errors.email = 'Email is invalid.'
-  } else {
-    errors.email = undefined
+  const found: Partial<Record<keyof ContactForm, string>> = {}
+  if (!form.name.trim()) found.name = 'Name is required.'
+  if (!form.subject.trim()) found.subject = 'Subject is required.'
+  if (!form.message.trim()) found.message = 'Message is required.'
+  if (!form.email.trim()) found.email = 'Email is required.'
+  else if (!EMAIL_PATTERN.test(form.email)) found.email = 'Email is invalid.'
+
+  for (const field of ['name', 'email', 'subject', 'message'] as const) {
+    const message = found[field]
+    if (message) errors[field] = message
+    else delete errors[field]
   }
-  return !errors.name && !errors.email && !errors.subject && !errors.message
+  return Object.keys(found).length === 0
 }
 
 function onSubmit(): void {

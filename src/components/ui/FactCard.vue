@@ -18,7 +18,7 @@ const display = useCountUp(props.fact.value, toRef(props, 'active'))
   <div class="fact-item">
     <AppIcon class="fact-icon" :name="fact.icon" size="36px" />
     <div class="details">
-      <h3 class="number">{{ display }}</h3>
+      <p class="number">{{ display }}</p>
       <p>{{ fact.label }}</p>
     </div>
   </div>
@@ -41,7 +41,10 @@ const display = useCountUp(props.fact.value, toRef(props, 'active'))
 }
 
 .number {
+  color: var(--color-heading);
   font-size: 30px;
+  font-weight: 700;
+  line-height: 1.2;
   margin: 0;
 }
 

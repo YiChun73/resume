@@ -11,8 +11,8 @@ const props = defineProps<{
 <template>
   <div class="skill-item">
     <div class="skill-info">
-      <h4>{{ skill.name }}</h4>
-      <span>{{ skill.level }}%</span>
+      <span class="name">{{ skill.name }}</span>
+      <span class="level">{{ skill.level }}%</span>
     </div>
     <div
       class="progress"
@@ -45,13 +45,15 @@ const props = defineProps<{
   align-items: baseline;
   justify-content: space-between;
 
-  h4 {
+  .name {
+    color: var(--color-heading);
     font-size: 16px;
     font-weight: 500;
+    line-height: 1.2;
     margin: 0 0 1rem;
   }
 
-  span {
+  .level {
     font-size: 14px;
   }
 }

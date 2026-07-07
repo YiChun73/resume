@@ -48,13 +48,13 @@ const slides = computed(() => {
           </div>
         </div>
 
-        <ul class="dots" role="tablist" aria-label="Choose review">
+        <ul class="dots" aria-label="Choose review">
           <li v-for="(_item, index) in testimonials" :key="index">
             <button
               type="button"
               :class="{ active: carousel.activeIndex.value === index }"
               :aria-label="`Go to slide ${index + 1}`"
-              :aria-current="carousel.activeIndex.value === index"
+              :aria-current="carousel.activeIndex.value === index ? 'true' : undefined"
               @click="carousel.goTo(index)"
             />
           </li>

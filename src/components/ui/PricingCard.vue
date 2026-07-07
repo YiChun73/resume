@@ -14,10 +14,10 @@ const isBest = computed(() => Boolean(props.plan.badge))
   <div class="price-item bg-white rounded shadow-dark text-center" :class="{ best: isBest }">
     <span v-if="plan.badge" class="badge">{{ plan.badge }}</span>
     <img :src="plan.image" :alt="plan.name" width="70" height="81" />
-    <h2 class="plan">{{ plan.name }}</h2>
+    <h3 class="plan">{{ plan.name }}</h3>
     <p>{{ plan.description }}</p>
     <p>{{ plan.support }}</p>
-    <h3 class="price"><em>$</em>{{ plan.price }}<span>Month</span></h3>
+    <p class="price"><span class="currency">$</span>{{ plan.price }}<span class="period">Month</span></p>
     <a href="#" class="btn btn-default">Get Started</a>
   </div>
 </template>
@@ -38,18 +38,19 @@ const isBest = computed(() => Boolean(props.plan.badge))
 }
 
 .price {
+  color: var(--color-heading);
   font-size: 36px;
   font-weight: 700;
+  line-height: 1.2;
   margin: 0;
 
-  em {
-    font-style: normal;
+  .currency {
     font-size: 14px;
     vertical-align: super;
     margin-right: 5px;
   }
 
-  span {
+  .period {
     font-size: 16px;
     font-weight: 400;
     margin-left: 10px;

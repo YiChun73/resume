@@ -11,7 +11,7 @@ defineProps<{
     <div class="thumb">
       <img :src="testimonial.avatar" :alt="testimonial.name" width="90" height="90" />
     </div>
-    <h4>{{ testimonial.name }}</h4>
+    <h3 class="name">{{ testimonial.name }}</h3>
     <span class="subtitle">{{ testimonial.role }}</span>
     <blockquote class="bubble bg-white padding-30 shadow-dark rounded triangle-top">
       <p>{{ testimonial.quote }}</p>
@@ -32,7 +32,8 @@ defineProps<{
   margin: 0 auto 1rem;
 }
 
-h4 {
+.name {
+  font-size: 18px;
   margin: 1rem 0 0;
 }
 

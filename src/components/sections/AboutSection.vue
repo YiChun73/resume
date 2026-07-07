@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { useTemplateRef } from 'vue'
 
-import SkillsSection from '@/components/sections/SkillsSection.vue'
 import FactCard from '@/components/ui/FactCard.vue'
 import SectionTitle from '@/components/ui/SectionTitle.vue'
+import SkillsList from '@/components/ui/SkillsList.vue'
 import { useInView } from '@/composables/useInView'
 import { facts } from '@/data/facts'
 import { profile } from '@/data/profile'
@@ -32,7 +32,7 @@ const factsVisible = useInView(factsRow)
                 <a href="#" class="btn btn-default">Download CV</a>
               </div>
               <div class="col-md-6">
-                <SkillsSection />
+                <SkillsList />
               </div>
             </div>
           </div>

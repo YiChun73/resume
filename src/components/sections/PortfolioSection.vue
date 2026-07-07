@@ -43,8 +43,10 @@ function closeLightbox(): void {
 }
 
 function onSelectFilter(event: Event): void {
-  const value = (event.target as HTMLSelectElement).value
-  activeFilter.value = value === '' ? null : (value as PortfolioCategory)
+  const select = event.target
+  if (!(select instanceof HTMLSelectElement)) return
+  const match = portfolioFilters.find((filter) => (filter.value ?? '') === select.value)
+  activeFilter.value = match?.value ?? null
 }
 
 function loadMore(): void {
@@ -82,7 +84,12 @@ function loadMore(): void {
 
       <div class="pf-filter-wrapper">
         <label class="visually-hidden" for="portfolio-filter-select">Filter works</label>
-        <select id="portfolio-filter-select" class="portfolio-filter-mobile" @change="onSelectFilter">
+        <select
+          id="portfolio-filter-select"
+          class="portfolio-filter-mobile"
+          :value="activeFilter ?? ''"
+          @change="onSelectFilter"
+        >
           <option v-for="filter in portfolioFilters" :key="filter.label" :value="filter.value ?? ''">
             {{ filter.label }}
           </option>

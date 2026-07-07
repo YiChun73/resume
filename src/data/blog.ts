@@ -6,7 +6,10 @@ export interface BlogPost {
   title: string
   category: string
   image: string
+  /** human-readable publication date */
   date: string
+  /** machine-readable date for the <time> element */
+  dateISO: string
   author: string
   url: string
 }
@@ -17,6 +20,7 @@ export const blogPosts: BlogPost[] = [
     category: 'Reviews',
     image: blog1,
     date: '09 February, 2020',
+    dateISO: '2020-02-09',
     author: 'Bolby',
     url: '#',
   },
@@ -25,6 +29,7 @@ export const blogPosts: BlogPost[] = [
     category: 'Tutorial',
     image: blog2,
     date: '07 February, 2020',
+    dateISO: '2020-02-07',
     author: 'Bolby',
     url: '#',
   },
@@ -33,6 +38,7 @@ export const blogPosts: BlogPost[] = [
     category: 'Business',
     image: blog3,
     date: '06 February, 2020',
+    dateISO: '2020-02-06',
     author: 'Bolby',
     url: '#',
   },

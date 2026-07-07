@@ -20,7 +20,7 @@ function onNavClick(target: string): void {
     <div class="container">
       <nav class="navbar" aria-label="Main navigation">
         <a class="navbar-brand" href="/" aria-label="Bolby — home" @click.prevent="onNavClick('home')">
-          <svg width="107" height="33" viewBox="0 0 107 33" role="img" aria-hidden="true">
+          <svg width="107" height="33" viewBox="0 0 107 33" aria-hidden="true">
             <text
               x="0"
               y="25"

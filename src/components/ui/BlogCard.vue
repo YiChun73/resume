@@ -16,19 +16,20 @@ defineProps<{
     :style="{ animationDelay: `${200 + index * 200}ms` }"
   >
     <div class="thumb">
-      <a :href="post.url">
+      <!-- duplicate of the title link below: hidden from the tab order and AT -->
+      <a :href="post.url" aria-hidden="true" tabindex="-1">
         <span class="category">{{ post.category }}</span>
-      </a>
-      <a :href="post.url">
-        <img :src="post.image" :alt="post.title" />
+        <img :src="post.image" alt="" />
       </a>
     </div>
     <div class="details">
-      <h4 class="title">
+      <h3 class="title">
         <a :href="post.url">{{ post.title }}</a>
-      </h4>
+      </h3>
       <ul class="list-inline meta">
-        <li class="list-inline-item">{{ post.date }}</li>
+        <li class="list-inline-item">
+          <time :datetime="post.dateISO">{{ post.date }}</time>
+        </li>
         <li class="list-inline-item">{{ post.author }}</li>
       </ul>
     </div>
