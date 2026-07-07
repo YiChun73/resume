@@ -24,6 +24,7 @@ const expVisible = useInView(expCard)
               v-for="(entry, index) in education"
               :key="entry.title"
               :entry="entry"
+              icon="graduation"
               :index="index"
               :visible="eduVisible"
             />
@@ -37,6 +38,7 @@ const expVisible = useInView(expCard)
               v-for="(entry, index) in experience"
               :key="entry.title"
               :entry="entry"
+              icon="briefcase"
               :index="index"
               :visible="expVisible"
             />
