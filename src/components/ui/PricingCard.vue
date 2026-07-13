@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
+import { useI18n } from 'vue-i18n'
 
 import type { PricingPlan } from '@/data/pricing'
 
@@ -7,18 +8,26 @@ const props = defineProps<{
   plan: PricingPlan
 }>()
 
-const isBest = computed(() => Boolean(props.plan.badge))
+const { t } = useI18n()
+
+const name = computed(() => t(`pricing.plans.${props.plan.id}.name`))
 </script>
 
 <template>
-  <div class="price-item bg-white rounded shadow-dark text-center" :class="{ best: isBest }">
-    <span v-if="plan.badge" class="badge">{{ plan.badge }}</span>
-    <img :src="plan.image" :alt="plan.name" width="70" height="81" />
-    <h3 class="plan">{{ plan.name }}</h3>
-    <p>{{ plan.description }}</p>
-    <p>{{ plan.support }}</p>
-    <p class="price"><span class="currency">$</span>{{ plan.price }}<span class="period">Month</span></p>
-    <a href="#" class="btn btn-default">Get Started</a>
+  <div
+    class="price-item bg-white rounded shadow-dark text-center"
+    :class="{ best: plan.recommended }"
+  >
+    <span v-if="plan.recommended" class="badge">{{ t('pricing.recommended') }}</span>
+    <img :src="plan.image" :alt="name" width="70" height="81" />
+    <h3 class="plan">{{ name }}</h3>
+    <p>{{ t(`pricing.plans.${plan.id}.description`) }}</p>
+    <p>{{ t(`pricing.plans.${plan.id}.support`) }}</p>
+    <p class="price">
+      <span class="currency">{{ t('pricing.currency') }}</span
+      >{{ plan.price }}<span class="period">{{ t('pricing.perMonth') }}</span>
+    </p>
+    <a href="#" class="btn btn-default">{{ t('pricing.getStarted') }}</a>
   </div>
 </template>
 
@@ -35,6 +44,7 @@ const isBest = computed(() => Boolean(props.plan.badge))
 
 .plan {
   font-size: 24px;
+  margin: 20px 0;
 }
 
 .price {

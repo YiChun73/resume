@@ -1,20 +1,24 @@
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n'
+
 import PricingCard from '@/components/ui/PricingCard.vue'
 import SectionTitle from '@/components/ui/SectionTitle.vue'
 import { pricingPlans } from '@/data/pricing'
+
+const { t } = useI18n()
 </script>
 
 <template>
   <section id="prices">
     <div class="container">
-      <SectionTitle title="Pricing Plans" />
+      <SectionTitle :title="t('pricing.title')" />
 
       <div class="row">
         <div
           v-for="(plan, index) in pricingPlans"
-          :key="plan.name"
+          :key="plan.id"
           class="col-md-4 price-col"
-          :class="plan.badge ? 'price-col--best' : 'price-col--side'"
+          :class="plan.recommended ? 'price-col--best' : 'price-col--side'"
           :data-position="index"
         >
           <PricingCard :plan="plan" />
