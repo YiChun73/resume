@@ -1,20 +1,21 @@
 <script setup lang="ts">
-import type { Testimonial } from '@/data/testimonials'
-
 defineProps<{
-  testimonial: Testimonial
+  name: string
+  role: string
+  avatar: string
+  quote: string
 }>()
 </script>
 
 <template>
   <div class="testimonial-item text-center">
     <div class="thumb">
-      <img :src="testimonial.avatar" :alt="testimonial.name" width="90" height="90" />
+      <img :src="avatar" :alt="name" width="90" height="90" />
     </div>
-    <h3 class="name">{{ testimonial.name }}</h3>
-    <span class="subtitle">{{ testimonial.role }}</span>
+    <h3 class="name">{{ name }}</h3>
+    <span class="subtitle">{{ role }}</span>
     <blockquote class="bubble bg-white padding-30 shadow-dark rounded triangle-top">
-      <p>{{ testimonial.quote }}</p>
+      <p>{{ quote }}</p>
     </blockquote>
   </div>
 </template>

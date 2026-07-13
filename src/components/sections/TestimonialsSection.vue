@@ -1,31 +1,39 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { useI18n } from 'vue-i18n'
 
 import SectionTitle from '@/components/ui/SectionTitle.vue'
 import TestimonialCard from '@/components/ui/TestimonialCard.vue'
 import { useCarousel } from '@/composables/useCarousel'
 import { clients } from '@/data/clients'
-import { testimonials } from '@/data/testimonials'
+import { testimonialAvatars } from '@/data/testimonials'
 
-const carousel = useCarousel(testimonials.length)
+const { t, tm, rt } = useI18n()
+
+// review copy paired with its avatar; the locale is fixed at startup
+const reviews = tm('testimonials.items').map((item, index) => ({
+  name: rt(item.name),
+  role: rt(item.role),
+  quote: rt(item.quote),
+  avatar: testimonialAvatars[index] ?? '',
+}))
+
+const carousel = useCarousel(reviews.length)
 
 // clone of the first slide appended for the seamless loop
-const slides = computed(() => {
-  const first = testimonials[0]
-  return first ? [...testimonials, first] : testimonials
-})
+const firstReview = reviews[0]
+const slides = firstReview ? [...reviews, firstReview] : reviews
 </script>
 
 <template>
   <section id="testimonials">
     <div class="container">
-      <SectionTitle title="Clients & Reviews" />
+      <SectionTitle :title="t('testimonials.title')" />
 
       <div
         class="testimonials-wrapper"
         role="region"
-        aria-roledescription="carousel"
-        aria-label="Client reviews"
+        :aria-roledescription="t('testimonials.carouselRole')"
+        :aria-label="t('testimonials.regionLabel')"
         @mouseenter="carousel.pause"
         @mouseleave="carousel.resume"
       >
@@ -38,22 +46,27 @@ const slides = computed(() => {
             @pointerup="carousel.onPointerUp"
           >
             <div
-              v-for="(testimonial, index) in slides"
+              v-for="(review, index) in slides"
               :key="index"
               class="slide"
               :aria-hidden="index !== carousel.activeIndex.value"
             >
-              <TestimonialCard :testimonial="testimonial" />
+              <TestimonialCard
+                :name="review.name"
+                :role="review.role"
+                :avatar="review.avatar"
+                :quote="review.quote"
+              />
             </div>
           </div>
         </div>
 
-        <ul class="dots" aria-label="Choose review">
-          <li v-for="(_item, index) in testimonials" :key="index">
+        <ul class="dots" :aria-label="t('testimonials.chooseReview')">
+          <li v-for="(_item, index) in reviews" :key="index">
             <button
               type="button"
               :class="{ active: carousel.activeIndex.value === index }"
-              :aria-label="`Go to slide ${index + 1}`"
+              :aria-label="t('testimonials.goToSlide', { n: index + 1 })"
               :aria-current="carousel.activeIndex.value === index ? 'true' : undefined"
               @click="carousel.goTo(index)"
             />
