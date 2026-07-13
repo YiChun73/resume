@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import { computed } from 'vue'
+import { useI18n } from 'vue-i18n'
+
 import type { Skill } from '@/data/skills'
 
 const props = defineProps<{
@@ -6,12 +9,16 @@ const props = defineProps<{
   /** fills the bar when true (triggered on scroll) */
   animate: boolean
 }>()
+
+const { t } = useI18n()
+
+const name = computed(() => t(`about.skills.${props.skill.id}`))
 </script>
 
 <template>
   <div class="skill-item">
     <div class="skill-info">
-      <span class="name">{{ skill.name }}</span>
+      <span class="name">{{ name }}</span>
       <span class="level">{{ skill.level }}%</span>
     </div>
     <div
@@ -20,7 +27,7 @@ const props = defineProps<{
       :aria-valuenow="skill.level"
       aria-valuemin="0"
       aria-valuemax="100"
-      :aria-label="skill.name"
+      :aria-label="name"
     >
       <div
         class="progress-bar"

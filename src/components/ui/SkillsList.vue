@@ -12,6 +12,6 @@ const isInView = useInView(root, { rootMargin: '0px 0px -40% 0px' })
 
 <template>
   <div ref="root" class="skills">
-    <SkillCard v-for="skill in skills" :key="skill.name" :skill="skill" :animate="isInView" />
+    <SkillCard v-for="skill in skills" :key="skill.id" :skill="skill" :animate="isInView" />
   </div>
 </template>

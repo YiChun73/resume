@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useTemplateRef } from 'vue'
+import { useI18n } from 'vue-i18n'
 
 import FactCard from '@/components/ui/FactCard.vue'
 import SectionTitle from '@/components/ui/SectionTitle.vue'
@@ -8,6 +9,8 @@ import { useInView } from '@/composables/useInView'
 import { facts } from '@/data/facts'
 import { profile } from '@/data/profile'
 
+const { t } = useI18n()
+
 const factsRow = useTemplateRef<HTMLDivElement>('factsRow')
 const factsVisible = useInView(factsRow)
 </script>
@@ -15,12 +18,12 @@ const factsVisible = useInView(factsRow)
 <template>
   <section id="about">
     <div class="container">
-      <SectionTitle title="About Me" />
+      <SectionTitle :title="t('about.title')" />
 
       <div class="row">
         <div class="col-md-3">
           <div class="avatar-col">
-            <img :src="profile.avatarAbout" :alt="profile.name" width="150" height="150" />
+            <img :src="profile.avatarAbout" :alt="t('hero.name')" width="150" height="150" />
           </div>
         </div>
 
@@ -28,8 +31,8 @@ const factsVisible = useInView(factsRow)
           <div class="about-card rounded bg-white shadow-dark padding-30">
             <div class="row">
               <div class="col-md-6 bio-col">
-                <p>{{ profile.bio }}</p>
-                <a href="#" class="btn btn-default">Download CV</a>
+                <p>{{ t('about.bio') }}</p>
+                <a href="#" class="btn btn-default">{{ t('about.downloadCv') }}</a>
               </div>
               <div class="col-md-6">
                 <SkillsList />
@@ -40,7 +43,7 @@ const factsVisible = useInView(factsRow)
       </div>
 
       <div ref="factsRow" class="row facts-row">
-        <div v-for="fact in facts" :key="fact.label" class="col-md-3 col-sm-6 fact-col">
+        <div v-for="fact in facts" :key="fact.id" class="col-md-3 col-sm-6 fact-col">
           <FactCard :fact="fact" :active="factsVisible" />
         </div>
       </div>

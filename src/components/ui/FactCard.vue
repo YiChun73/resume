@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { toRef } from 'vue'
+import { useI18n } from 'vue-i18n'
 
 import AppIcon from '@/components/ui/AppIcon.vue'
 import { useCountUp } from '@/composables/useCountUp'
@@ -11,6 +12,8 @@ const props = defineProps<{
   active: boolean
 }>()
 
+const { t } = useI18n()
+
 const display = useCountUp(props.fact.value, toRef(props, 'active'))
 </script>
 
@@ -19,7 +22,7 @@ const display = useCountUp(props.fact.value, toRef(props, 'active'))
     <AppIcon class="fact-icon" :name="fact.icon" size="36px" />
     <div class="details">
       <p class="number">{{ display }}</p>
-      <p>{{ fact.label }}</p>
+      <p>{{ t(`about.facts.${fact.id}`) }}</p>
     </div>
   </div>
 </template>

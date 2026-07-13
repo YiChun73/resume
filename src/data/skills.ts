@@ -1,5 +1,8 @@
+// Names come from the `about.skills` locale messages.
+export type SkillId = 'development' | 'uiux' | 'photography'
+
 export interface Skill {
-  name: string
+  id: SkillId
   /** 0-100 */
   level: number
   /** progress bar color (CSS color value) */
@@ -7,7 +10,7 @@ export interface Skill {
 }
 
 export const skills: Skill[] = [
-  { name: 'Development', level: 85, color: '#ffd15c' },
-  { name: 'UI/UX design', level: 95, color: '#ff4c60' },
-  { name: 'Photography', level: 70, color: '#6c6ce5' },
+  { id: 'development', level: 85, color: '#ffd15c' },
+  { id: 'uiux', level: 95, color: '#ff4c60' },
+  { id: 'photography', level: 70, color: '#6c6ce5' },
 ]

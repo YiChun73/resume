@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useTemplateRef } from 'vue'
+import { useI18n } from 'vue-i18n'
 
 import SocialLinks from '@/components/ui/SocialLinks.vue'
 import { useMouseParallax } from '@/composables/useMouseParallax'
@@ -8,8 +9,10 @@ import { useTextRotator } from '@/composables/useTextRotator'
 import { profile } from '@/data/profile'
 import { socialLinks } from '@/data/social'
 
+const { t, tm, rt } = useI18n()
+
 const scene = useTemplateRef<HTMLElement>('scene')
-const role = useTextRotator(profile.roles)
+const role = useTextRotator(tm('hero.roles').map((phrase) => rt(phrase)))
 const { scrollToSection } = useSmoothScroll()
 
 useMouseParallax(scene)
@@ -19,12 +22,17 @@ useMouseParallax(scene)
   <section id="home" class="home">
     <div class="container">
       <div class="intro">
-        <img :src="profile.avatarHero" :alt="profile.name" class="avatar" width="108" height="108" />
+        <img
+          :src="profile.avatarHero"
+          :alt="t('hero.name')"
+          class="avatar"
+          width="108"
+          height="108"
+        />
 
-        <h1>{{ profile.name }}</h1>
+        <h1>{{ t('hero.name') }}</h1>
         <p class="tagline">
-          I'm a
-          <Transition name="rotate" mode="out-in">
+          {{ t('hero.taglinePrefix') }}<Transition name="rotate" mode="out-in">
             <span :key="role" class="rotating-text">{{ role }}</span>
           </Transition>
         </p>
@@ -33,14 +41,14 @@ useMouseParallax(scene)
 
         <div class="cta">
           <a href="#contact" class="btn btn-default" @click.prevent="scrollToSection('contact')">
-            Hire me
+            {{ t('hero.hireMe') }}
           </a>
         </div>
       </div>
 
       <div class="scroll-down">
         <a href="#about" class="mouse-wrapper" @click.prevent="scrollToSection('about')">
-          <span>Scroll Down</span>
+          <span>{{ t('hero.scrollDown') }}</span>
           <span class="mouse">
             <span class="wheel" />
           </span>
