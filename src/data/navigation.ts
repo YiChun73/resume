@@ -1,15 +1,4 @@
-export interface NavItem {
-  label: string
-  /** id of the target section element */
-  target: string
-}
+// Section ids in page order; labels come from the `nav` locale messages.
+export const navTargets = ['home', 'about', 'services', 'experience', 'works', 'blog', 'contact'] as const
 
-export const navItems: NavItem[] = [
-  { label: 'Home', target: 'home' },
-  { label: 'About', target: 'about' },
-  { label: 'Services', target: 'services' },
-  { label: 'Experience', target: 'experience' },
-  { label: 'Works', target: 'works' },
-  { label: 'Blog', target: 'blog' },
-  { label: 'Contact', target: 'contact' },
-]
+export type NavTarget = (typeof navTargets)[number]

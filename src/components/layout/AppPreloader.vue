@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { onBeforeUnmount, onMounted, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const visible = ref(true)
 let timer = 0
 
@@ -26,7 +28,7 @@ onBeforeUnmount(() => {
 
 <template>
   <Transition name="preloader">
-    <div v-if="visible" class="preloader" role="status" aria-label="Loading">
+    <div v-if="visible" class="preloader" role="status" :aria-label="t('common.loading')">
       <div class="loader">
         <div class="orbit"><span class="dot" /></div>
         <div class="orbit"><span class="dot" /></div>

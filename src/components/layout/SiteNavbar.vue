@@ -1,15 +1,17 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 
 import { useScrollSpy } from '@/composables/useScrollSpy'
 import { useSmoothScroll } from '@/composables/useSmoothScroll'
-import { navItems } from '@/data/navigation'
+import { navTargets, type NavTarget } from '@/data/navigation'
 
+const { t } = useI18n()
 const menuOpen = ref(false)
 const { scrollToSection } = useSmoothScroll()
-const activeId = useScrollSpy(navItems.map((item) => item.target))
+const activeId = useScrollSpy([...navTargets])
 
-function onNavClick(target: string): void {
+function onNavClick(target: NavTarget): void {
   menuOpen.value = false
   scrollToSection(target)
 }
@@ -18,8 +20,13 @@ function onNavClick(target: string): void {
 <template>
   <header class="site-header">
     <div class="container">
-      <nav class="navbar" aria-label="Main navigation">
-        <a class="navbar-brand" href="/" aria-label="Bolby — home" @click.prevent="onNavClick('home')">
+      <nav class="navbar" :aria-label="t('common.mainNav')">
+        <a
+          class="navbar-brand"
+          href="/"
+          :aria-label="t('nav.brandHome')"
+          @click.prevent="onNavClick('home')"
+        >
           <svg width="107" height="33" viewBox="0 0 107 33" aria-hidden="true">
             <text
               x="0"
@@ -29,7 +36,7 @@ function onNavClick(target: string): void {
               font-weight="700"
               fill="#fff"
             >
-              Bolby
+              {{ t('common.brand') }}
             </text>
             <circle cx="76" cy="24" r="4" fill="#ff4c60" />
           </svg>
@@ -40,7 +47,7 @@ function onNavClick(target: string): void {
           type="button"
           :aria-expanded="menuOpen"
           aria-controls="site-menu"
-          aria-label="Toggle navigation"
+          :aria-label="t('common.toggleNav')"
           @click="menuOpen = !menuOpen"
         >
           <svg viewBox="0 0 30 30" width="30" height="30" aria-hidden="true">
@@ -55,15 +62,15 @@ function onNavClick(target: string): void {
 
         <div id="site-menu" class="navbar-menu" :class="{ 'is-open': menuOpen }">
           <ul class="navbar-nav">
-            <li v-for="item in navItems" :key="item.target">
+            <li v-for="target in navTargets" :key="target">
               <a
                 class="nav-link"
-                :class="{ active: activeId === item.target }"
-                :href="`#${item.target}`"
-                :aria-current="activeId === item.target ? 'true' : undefined"
-                @click.prevent="onNavClick(item.target)"
+                :class="{ active: activeId === target }"
+                :href="`#${target}`"
+                :aria-current="activeId === target ? 'true' : undefined"
+                @click.prevent="onNavClick(target)"
               >
-                {{ item.label }}
+                {{ t(`nav.${target}`) }}
               </a>
             </li>
           </ul>

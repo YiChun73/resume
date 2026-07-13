@@ -1,11 +1,13 @@
 <script setup lang="ts">
-import { profile } from '@/data/profile'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 </script>
 
 <template>
   <footer class="footer">
     <div class="container">
-      <span class="copyright">{{ profile.copyright }}</span>
+      <span class="copyright">{{ t('footer.copyright') }}</span>
     </div>
   </footer>
 </template>

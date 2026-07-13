@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import { onBeforeUnmount, onMounted, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 
 import AppIcon from '@/components/ui/AppIcon.vue'
 import { useSmoothScroll } from '@/composables/useSmoothScroll'
 
+const { t } = useI18n()
 const visible = ref(false)
 const { scrollToTop } = useSmoothScroll()
 
@@ -25,7 +27,7 @@ onBeforeUnmount(() => window.removeEventListener('scroll', onScroll))
       v-show="visible"
       class="return-to-top"
       type="button"
-      aria-label="Back to top"
+      :aria-label="t('common.backToTop')"
       @click="scrollToTop"
     >
       <AppIcon name="arrow-up" size="16px" />
