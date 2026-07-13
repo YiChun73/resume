@@ -2,9 +2,11 @@ import serviceDesign from '@/assets/images/service-1.svg'
 import serviceDev from '@/assets/images/service-2.svg'
 import servicePhoto from '@/assets/images/service-3.svg'
 
+// Titles and descriptions come from the `services.items` locale messages.
+export type ServiceId = 'design' | 'development' | 'photography'
+
 export interface Service {
-  title: string
-  description: string
+  id: ServiceId
   image: string
   /** card background (CSS color value) */
   background: string
@@ -15,24 +17,21 @@ export interface Service {
 
 export const services: Service[] = [
   {
-    title: 'UI/UX design',
-    description: 'Lorem ipsum dolor sit amet consectetuer adipiscing elit aenean commodo ligula eget.',
+    id: 'design',
     image: serviceDesign,
     background: 'var(--color-service-blue)',
     shadow: 'blue',
     light: true,
   },
   {
-    title: 'Web Development',
-    description: 'Lorem ipsum dolor sit amet consectetuer adipiscing elit aenean commodo ligula eget.',
+    id: 'development',
     image: serviceDev,
     background: 'var(--color-service-yellow)',
     shadow: 'yellow',
     light: false,
   },
   {
-    title: 'Photography',
-    description: 'Lorem ipsum dolor sit amet consectetuer adipiscing elit aenean commodo ligula eget.',
+    id: 'photography',
     image: servicePhoto,
     background: 'var(--color-service-pink)',
     shadow: 'pink',

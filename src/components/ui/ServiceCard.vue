@@ -1,9 +1,16 @@
 <script setup lang="ts">
+import { computed } from 'vue'
+import { useI18n } from 'vue-i18n'
+
 import type { Service } from '@/data/services'
 
-defineProps<{
+const props = defineProps<{
   service: Service
 }>()
+
+const { t } = useI18n()
+
+const title = computed(() => t(`services.items.${props.service.id}.title`))
 </script>
 
 <template>
@@ -12,9 +19,9 @@ defineProps<{
     :class="[`shadow-${service.shadow}`, { 'service-box--light': service.light }]"
     :style="{ background: service.background }"
   >
-    <img :src="service.image" :alt="service.title" width="80" height="80" />
-    <h3>{{ service.title }}</h3>
-    <p>{{ service.description }}</p>
+    <img :src="service.image" :alt="title" width="80" height="80" />
+    <h3>{{ title }}</h3>
+    <p>{{ t(`services.items.${service.id}.description`) }}</p>
   </div>
 </template>
 
