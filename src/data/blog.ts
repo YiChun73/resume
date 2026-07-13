@@ -2,44 +2,19 @@ import blog1 from '@/assets/images/blog/1.svg'
 import blog2 from '@/assets/images/blog/2.svg'
 import blog3 from '@/assets/images/blog/3.svg'
 
+// Titles, categories and display dates come from the `blog.posts` messages.
+export type BlogPostId = 'tools' | 'payment' | 'startup'
+
 export interface BlogPost {
-  title: string
-  category: string
+  id: BlogPostId
   image: string
-  /** human-readable publication date */
-  date: string
   /** machine-readable date for the <time> element */
   dateISO: string
-  author: string
   url: string
 }
 
 export const blogPosts: BlogPost[] = [
-  {
-    title: '5 Best App Development Tool for Your Project',
-    category: 'Reviews',
-    image: blog1,
-    date: '09 February, 2020',
-    dateISO: '2020-02-09',
-    author: 'Bolby',
-    url: '#',
-  },
-  {
-    title: 'Common Misconceptions About Payment',
-    category: 'Tutorial',
-    image: blog2,
-    date: '07 February, 2020',
-    dateISO: '2020-02-07',
-    author: 'Bolby',
-    url: '#',
-  },
-  {
-    title: '3 Things To Know About Startup Business',
-    category: 'Business',
-    image: blog3,
-    date: '06 February, 2020',
-    dateISO: '2020-02-06',
-    author: 'Bolby',
-    url: '#',
-  },
+  { id: 'tools', image: blog1, dateISO: '2020-02-09', url: '#' },
+  { id: 'payment', image: blog2, dateISO: '2020-02-07', url: '#' },
+  { id: 'startup', image: blog3, dateISO: '2020-02-06', url: '#' },
 ]

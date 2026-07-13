@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n'
+
 import type { BlogPost } from '@/data/blog'
 
 defineProps<{
@@ -7,6 +9,8 @@ defineProps<{
   index: number
   visible: boolean
 }>()
+
+const { t } = useI18n()
 </script>
 
 <template>
@@ -18,19 +22,19 @@ defineProps<{
     <div class="thumb">
       <!-- duplicate of the title link below: hidden from the tab order and AT -->
       <a :href="post.url" aria-hidden="true" tabindex="-1">
-        <span class="category">{{ post.category }}</span>
+        <span class="category">{{ t(`blog.posts.${post.id}.category`) }}</span>
         <img :src="post.image" alt="" />
       </a>
     </div>
     <div class="details">
       <h3 class="title">
-        <a :href="post.url">{{ post.title }}</a>
+        <a :href="post.url">{{ t(`blog.posts.${post.id}.title`) }}</a>
       </h3>
       <ul class="list-inline meta">
         <li class="list-inline-item">
-          <time :datetime="post.dateISO">{{ post.date }}</time>
+          <time :datetime="post.dateISO">{{ t(`blog.posts.${post.id}.date`) }}</time>
         </li>
-        <li class="list-inline-item">{{ post.author }}</li>
+        <li class="list-inline-item">{{ t('blog.author') }}</li>
       </ul>
     </div>
   </article>
