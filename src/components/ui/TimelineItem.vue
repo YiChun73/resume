@@ -1,7 +1,12 @@
 <script setup lang="ts">
 import AppIcon from '@/components/ui/AppIcon.vue'
-import type { TimelineEntry } from '@/data/timeline'
 import type { IconName } from '@/types/icons'
+
+export interface TimelineEntry {
+  period: string
+  title: string
+  description: string
+}
 
 defineProps<{
   entry: TimelineEntry
