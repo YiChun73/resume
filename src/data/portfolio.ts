@@ -9,11 +9,14 @@ import type { IconName } from '@/types/icons'
 
 export type PortfolioCategory = 'creative' | 'art' | 'design' | 'branding'
 
-export interface PortfolioFilter {
-  label: string
-  /** category value, or null for "everything" */
-  value: PortfolioCategory | null
-}
+// Titles come from the `portfolio.items` locale messages.
+export type PortfolioSlug =
+  | 'projectManagement'
+  | 'guestApp'
+  | 'deliveryApp'
+  | 'onboarding'
+  | 'imacMockup'
+  | 'gameStore'
 
 interface MediaImage {
   type: 'image'
@@ -36,70 +39,65 @@ interface MediaExternal {
   url: string
 }
 
+/** copy comes from the `portfolio.dialog` locale messages */
 interface MediaInline {
   type: 'inline'
   image: string
-  heading: string
-  paragraphs: string[]
-  cta: { label: string; url: string }
+  ctaUrl: string
 }
 
 export type PortfolioMedia = MediaImage | MediaGallery | MediaEmbed | MediaExternal | MediaInline
 
 export interface PortfolioItem {
   id: number
-  title: string
-  /** category badge label shown on hover */
-  term: string
+  slug: PortfolioSlug
   categories: PortfolioCategory[]
+  /** categories shown on the hover badge (not always all of them) */
+  termCategories: PortfolioCategory[]
   thumbnail: string
   icon: IconName
   media: PortfolioMedia
 }
 
-export const portfolioFilters: PortfolioFilter[] = [
-  { label: 'Everything', value: null },
-  { label: 'Creative', value: 'creative' },
-  { label: 'Art', value: 'art' },
-  { label: 'Design', value: 'design' },
-  { label: 'Branding', value: 'branding' },
+/** filter values in display order; null means "everything" */
+export const portfolioFilters: (PortfolioCategory | null)[] = [
+  null,
+  'creative',
+  'art',
+  'design',
+  'branding',
 ]
 
 const walkthroughDialog: MediaInline = {
   type: 'inline',
   image: singleWork,
-  heading: 'Guest App Walkthrough Screens',
-  paragraphs: [
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam hendrerit nibh in massa semper rutrum. In rhoncus eleifend mi id tempus.',
-    'Donec consectetur, libero at pretium euismod, nisl felis lobortis urna, id tristique nisl lectus eget ligula.',
-  ],
-  cta: { label: 'View on Dribbble', url: 'https://dribbble.com' },
+  ctaUrl: 'https://dribbble.com',
 }
 
 export const portfolioItems: PortfolioItem[] = [
   {
     id: 1,
-    title: 'Project Managment Illustration',
-    term: 'Art',
+    slug: 'projectManagement',
     categories: ['art'],
+    termCategories: ['art'],
     thumbnail: work1,
     icon: 'magnifier-add',
     media: { type: 'image', src: work1 },
   },
   {
     id: 2,
-    title: 'Guest App Walkthrough Screens',
-    term: 'Creative',
+    slug: 'guestApp',
     categories: ['creative', 'design'],
+    termCategories: ['creative'],
     thumbnail: work2,
     icon: 'options',
     media: walkthroughDialog,
   },
   {
     id: 3,
-    title: 'Delivery App Wireframe',
-    term: 'Branding',
+    slug: 'deliveryApp',
     categories: ['branding'],
+    termCategories: ['branding'],
     thumbnail: work3,
     icon: 'camrecorder',
     media: {
@@ -109,9 +107,9 @@ export const portfolioItems: PortfolioItem[] = [
   },
   {
     id: 4,
-    title: 'Onboarding Motivation',
-    term: 'Creative',
+    slug: 'onboarding',
     categories: ['creative'],
+    termCategories: ['creative'],
     thumbnail: work4,
     icon: 'music-tone-alt',
     media: {
@@ -121,18 +119,18 @@ export const portfolioItems: PortfolioItem[] = [
   },
   {
     id: 5,
-    title: 'iMac Mockup Design',
-    term: 'Art, Branding',
+    slug: 'imacMockup',
     categories: ['art', 'branding'],
+    termCategories: ['art', 'branding'],
     thumbnail: work5,
     icon: 'picture',
     media: { type: 'gallery', images: [work5, work4] },
   },
   {
     id: 6,
-    title: 'Game Store App Concept',
-    term: 'Creative, Design',
+    slug: 'gameStore',
     categories: ['creative', 'design'],
+    termCategories: ['creative', 'design'],
     thumbnail: work6,
     icon: 'link',
     media: { type: 'external', url: 'https://themeforest.net/user/pxlsolutions/portfolio' },
@@ -143,27 +141,27 @@ export const portfolioItems: PortfolioItem[] = [
 export const portfolioItemsPage2: PortfolioItem[] = [
   {
     id: 7,
-    title: 'Project Managment Illustration',
-    term: 'Art',
+    slug: 'projectManagement',
     categories: ['art'],
+    termCategories: ['art'],
     thumbnail: work3,
     icon: 'magnifier-add',
     media: { type: 'image', src: work1 },
   },
   {
     id: 8,
-    title: 'Guest App Walkthrough Screens',
-    term: 'Creative',
+    slug: 'guestApp',
     categories: ['creative', 'design'],
+    termCategories: ['creative'],
     thumbnail: work1,
     icon: 'options',
     media: walkthroughDialog,
   },
   {
     id: 9,
-    title: 'Delivery App Wireframe',
-    term: 'Branding',
+    slug: 'deliveryApp',
     categories: ['branding'],
+    termCategories: ['branding'],
     thumbnail: work4,
     icon: 'camrecorder',
     media: {

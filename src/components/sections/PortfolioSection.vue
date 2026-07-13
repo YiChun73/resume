@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, ref, useTemplateRef } from 'vue'
+import { useI18n } from 'vue-i18n'
 
 import AppIcon from '@/components/ui/AppIcon.vue'
 import AppLightbox from '@/components/ui/AppLightbox.vue'
@@ -13,6 +14,8 @@ import {
   type PortfolioCategory,
   type PortfolioItem,
 } from '@/data/portfolio'
+
+const { t } = useI18n()
 
 const items = ref<PortfolioItem[]>([...portfolioItems])
 const activeFilter = ref<PortfolioCategory | null>(null)
@@ -28,6 +31,10 @@ const filteredItems = computed(() => {
   if (!filter) return items.value
   return items.value.filter((item) => item.categories.includes(filter))
 })
+
+function filterLabel(filter: PortfolioCategory | null): string {
+  return filter ? t(`portfolio.categories.${filter}`) : t('portfolio.filterAll')
+}
 
 let opener: HTMLElement | null = null
 
@@ -45,8 +52,8 @@ function closeLightbox(): void {
 function onSelectFilter(event: Event): void {
   const select = event.target
   if (!(select instanceof HTMLSelectElement)) return
-  const match = portfolioFilters.find((filter) => (filter.value ?? '') === select.value)
-  activeFilter.value = match?.value ?? null
+  const match = portfolioFilters.find((filter) => (filter ?? '') === select.value)
+  activeFilter.value = match ?? null
 }
 
 function loadMore(): void {
@@ -63,35 +70,37 @@ function loadMore(): void {
 <template>
   <section id="works">
     <div class="container">
-      <SectionTitle title="Recent works" />
+      <SectionTitle :title="t('portfolio.title')" />
 
       <ul
         ref="filterBar"
         class="portfolio-filter list-inline reveal"
         :class="{ 'is-visible': filterVisible }"
       >
-        <li v-for="filter in portfolioFilters" :key="filter.label" class="list-inline-item">
+        <li v-for="filter in portfolioFilters" :key="filter ?? 'all'" class="list-inline-item">
           <button
             type="button"
-            :class="{ current: activeFilter === filter.value }"
-            :aria-pressed="activeFilter === filter.value"
-            @click="activeFilter = filter.value"
+            :class="{ current: activeFilter === filter }"
+            :aria-pressed="activeFilter === filter"
+            @click="activeFilter = filter"
           >
-            {{ filter.label }}
+            {{ filterLabel(filter) }}
           </button>
         </li>
       </ul>
 
       <div class="pf-filter-wrapper">
-        <label class="visually-hidden" for="portfolio-filter-select">Filter works</label>
+        <label class="visually-hidden" for="portfolio-filter-select">
+          {{ t('portfolio.filterLabel') }}
+        </label>
         <select
           id="portfolio-filter-select"
           class="portfolio-filter-mobile"
           :value="activeFilter ?? ''"
           @change="onSelectFilter"
         >
-          <option v-for="filter in portfolioFilters" :key="filter.label" :value="filter.value ?? ''">
-            {{ filter.label }}
+          <option v-for="filter in portfolioFilters" :key="filter ?? 'all'" :value="filter ?? ''">
+            {{ filterLabel(filter) }}
           </option>
         </select>
       </div>
@@ -105,7 +114,7 @@ function loadMore(): void {
       <div v-if="!allLoaded" class="load-more text-center">
         <button type="button" class="btn btn-default" :disabled="loading" @click="loadMore">
           <AppIcon v-show="loading" class="spinner" name="spinner" size="16px" />
-          Load more
+          {{ t('portfolio.loadMore') }}
         </button>
       </div>
 

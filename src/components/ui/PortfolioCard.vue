@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
+import { useI18n } from 'vue-i18n'
 
 import AppIcon from '@/components/ui/AppIcon.vue'
 import type { PortfolioItem } from '@/data/portfolio'
@@ -11,6 +12,16 @@ const props = defineProps<{
 const emit = defineEmits<{
   open: [item: PortfolioItem]
 }>()
+
+const { t } = useI18n()
+
+const title = computed(() => t(`portfolio.items.${props.item.slug}`))
+
+const term = computed(() =>
+  props.item.termCategories
+    .map((category) => t(`portfolio.categories.${category}`))
+    .join(t('portfolio.categoryJoin')),
+)
 
 const isExternal = computed(() => props.item.media.type === 'external')
 
@@ -32,14 +43,14 @@ const externalUrl = computed(() =>
   >
     <span class="portfolio-item rounded shadow-dark">
       <span class="details">
-        <span class="term">{{ item.term }}</span>
-        <span class="title">{{ item.title }}</span>
+        <span class="term">{{ term }}</span>
+        <span class="title">{{ title }}</span>
         <span class="more-button">
           <AppIcon :name="item.icon" size="20px" />
         </span>
       </span>
       <span class="thumb">
-        <img :src="item.thumbnail" :alt="item.title" />
+        <img :src="item.thumbnail" :alt="title" />
         <span class="mask" />
       </span>
     </span>
