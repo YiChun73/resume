@@ -7,8 +7,8 @@ export default {
   carouselRole: 'carousel',
   chooseReview: 'Choose review',
   goToSlide: 'Go to slide {n}',
-  items: [
-    { name: 'John Doe', role: 'Product designer at Dribbble', quote: `${quote} 👍` },
-    { name: 'John Doe', role: 'Product designer at Dribbble', quote: `${quote} 🔥` },
-  ],
+  items: {
+    thumbsUp: { name: 'John Doe', role: 'Product designer at Dribbble', quote: `${quote} 👍` },
+    fire: { name: 'John Doe', role: 'Product designer at Dribbble', quote: `${quote} 🔥` },
+  },
 }

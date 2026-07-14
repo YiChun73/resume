@@ -6,8 +6,8 @@ export default {
   carouselRole: '輪播',
   chooseReview: '選擇評價',
   goToSlide: '前往第 {n} 則評價',
-  items: [
-    { name: 'John Doe', role: 'Dribbble 產品設計師', quote: `${quote} 👍` },
-    { name: 'John Doe', role: 'Dribbble 產品設計師', quote: `${quote} 🔥` },
-  ],
+  items: {
+    thumbsUp: { name: 'John Doe', role: 'Dribbble 產品設計師', quote: `${quote} 👍` },
+    fire: { name: 'John Doe', role: 'Dribbble 產品設計師', quote: `${quote} 🔥` },
+  },
 }

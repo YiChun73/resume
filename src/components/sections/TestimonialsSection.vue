@@ -5,23 +5,15 @@ import SectionTitle from '@/components/ui/SectionTitle.vue'
 import TestimonialCard from '@/components/ui/TestimonialCard.vue'
 import { useCarousel } from '@/composables/useCarousel'
 import { clients } from '@/data/clients'
-import { testimonialAvatars } from '@/data/testimonials'
+import { testimonials } from '@/data/testimonials'
 
-const { t, tm, rt } = useI18n()
+const { t } = useI18n()
 
-// review copy paired with its avatar; the locale is fixed at startup
-const reviews = tm('testimonials.items').map((item, index) => ({
-  name: rt(item.name),
-  role: rt(item.role),
-  quote: rt(item.quote),
-  avatar: testimonialAvatars[index] ?? '',
-}))
-
-const carousel = useCarousel(reviews.length)
+const carousel = useCarousel(testimonials.length)
 
 // clone of the first slide appended for the seamless loop
-const firstReview = reviews[0]
-const slides = firstReview ? [...reviews, firstReview] : reviews
+const firstTestimonial = testimonials[0]
+const slides = firstTestimonial ? [...testimonials, firstTestimonial] : testimonials
 </script>
 
 <template>
@@ -46,23 +38,23 @@ const slides = firstReview ? [...reviews, firstReview] : reviews
             @pointerup="carousel.onPointerUp"
           >
             <div
-              v-for="(review, index) in slides"
+              v-for="(item, index) in slides"
               :key="index"
               class="slide"
               :aria-hidden="index !== carousel.activeIndex.value"
             >
               <TestimonialCard
-                :name="review.name"
-                :role="review.role"
-                :avatar="review.avatar"
-                :quote="review.quote"
+                :name="t(`testimonials.items.${item.id}.name`)"
+                :role="t(`testimonials.items.${item.id}.role`)"
+                :avatar="item.avatar"
+                :quote="t(`testimonials.items.${item.id}.quote`)"
               />
             </div>
           </div>
         </div>
 
         <ul class="dots" :aria-label="t('testimonials.chooseReview')">
-          <li v-for="(_item, index) in reviews" :key="index">
+          <li v-for="(_item, index) in testimonials" :key="index">
             <button
               type="button"
               :class="{ active: carousel.activeIndex.value === index }"
