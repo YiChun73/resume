@@ -57,43 +57,43 @@ useMouseParallax(scene)
 
       <div ref="scene" class="parallax" aria-hidden="true">
         <svg class="layer p1" data-depth="0.3" width="27" height="29" viewBox="0 0 27 29">
-          <circle cx="13.5" cy="14.5" r="11" fill="none" stroke="#ffd15c" stroke-width="3" stroke-dasharray="52 17" stroke-linecap="round" transform="rotate(115 13.5 14.5)" />
+          <circle cx="13.5" cy="14.5" r="11" fill="none" stroke="currentColor" stroke-width="3" stroke-dasharray="52 17" stroke-linecap="round" transform="rotate(115 13.5 14.5)" />
         </svg>
         <svg class="layer p2" data-depth="0.2" width="26" height="26" viewBox="0 0 26 26">
-          <polygon points="13,3.4 2.4,24.5 23.6,24.5" fill="none" stroke="#ff4c60" stroke-width="3" />
+          <polygon points="13,3.4 2.4,24.5 23.6,24.5" fill="none" stroke="currentColor" stroke-width="3" />
         </svg>
         <svg class="layer p3" data-depth="0.3" width="30" height="25" viewBox="0 0 30 25">
-          <path d="M2 23a13 13 0 0 1 26 0" fill="none" stroke="#44d7b6" stroke-width="3" />
+          <path d="M2 23a13 13 0 0 1 26 0" fill="none" stroke="currentColor" stroke-width="3" />
         </svg>
         <svg class="layer p4" data-depth="0.6" width="15" height="23" viewBox="0 0 15 23">
-          <rect x="6" y="-1" width="3" height="25" rx="1.5" fill="#ffd15c" transform="rotate(30 7.5 11.5)" />
+          <rect x="6" y="-1" width="3" height="25" rx="1.5" fill="currentColor" transform="rotate(30 7.5 11.5)" />
         </svg>
         <svg class="layer p5" data-depth="0.2" width="15" height="23" viewBox="0 0 15 23">
-          <rect x="6" y="-1" width="3" height="25" rx="1.5" fill="#6c6ce5" transform="rotate(30 7.5 11.5)" />
+          <rect x="6" y="-1" width="3" height="25" rx="1.5" fill="currentColor" transform="rotate(30 7.5 11.5)" />
         </svg>
         <svg class="layer p6" data-depth="0.5" width="49" height="17" viewBox="0 0 49 17">
-          <g fill="none" stroke="#ff4c60" stroke-width="3">
+          <g fill="none" stroke="currentColor" stroke-width="3">
             <path d="M2 16a10.5 10.5 0 0 1 21 0" />
             <path d="M26 16a10.5 10.5 0 0 1 21 0" />
           </g>
         </svg>
         <svg class="layer p7" data-depth="0.4" width="26" height="26" viewBox="0 0 26 26">
-          <polygon points="13,22.6 2.4,1.5 23.6,1.5" fill="none" stroke="#ffd15c" stroke-width="3" />
+          <polygon points="13,22.6 2.4,1.5 23.6,1.5" fill="none" stroke="currentColor" stroke-width="3" />
         </svg>
         <svg class="layer p8" data-depth="0.3" width="19" height="21" viewBox="0 0 19 21">
-          <rect x="8" y="-2" width="3" height="25" rx="1.5" fill="#6c6ce5" transform="rotate(-40 9.5 10.5)" />
+          <rect x="8" y="-2" width="3" height="25" rx="1.5" fill="currentColor" transform="rotate(-40 9.5 10.5)" />
         </svg>
         <svg class="layer p9" data-depth="0.3" data-depth-y="-1.30" width="30" height="25" viewBox="0 0 30 25">
-          <path d="M28 2a13 13 0 0 1-26 0" fill="none" stroke="#6c6ce5" stroke-width="3" />
+          <path d="M28 2a13 13 0 0 1-26 0" fill="none" stroke="currentColor" stroke-width="3" />
         </svg>
         <svg class="layer p10" data-depth="0.2" width="47" height="29" viewBox="0 0 47 29">
-          <g fill="none" stroke="#44d7b6" stroke-width="3" transform="rotate(-16 23.5 14.5)">
+          <g fill="none" stroke="currentColor" stroke-width="3" transform="rotate(-16 23.5 14.5)">
             <path d="M4 22a10 10 0 0 1 20 0" />
             <path d="M24 15a10 10 0 0 1 20 0" />
           </g>
         </svg>
         <svg class="layer p11" data-depth="0.5" width="33" height="20" viewBox="0 0 33 20">
-          <path d="M2 2a15.5 15.5 0 0 0 29 6" fill="none" stroke="#ffd15c" stroke-width="3" stroke-linecap="round" />
+          <path d="M2 2a15.5 15.5 0 0 0 29 6" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" />
         </svg>
       </div>
     </div>
@@ -213,17 +213,17 @@ useMouseParallax(scene)
   position: absolute;
 }
 
-.p1 { left: 10%; top: 10%; }
-.p2 { left: 25%; top: 30%; }
-.p3 { left: 15%; bottom: 30%; }
-.p4 { left: 10%; bottom: 10%; }
-.p5 { left: 45%; top: 10%; }
-.p6 { left: 40%; bottom: 10%; }
-.p7 { top: 20%; right: 30%; }
-.p8 { right: 30%; bottom: 20%; }
-.p9 { right: 10%; top: 10%; }
-.p10 { top: 45%; right: 20%; }
-.p11 { bottom: 10%; right: 10%; }
+.p1 { left: 10%; top: 10%; color: var(--color-yellow); }
+.p2 { left: 25%; top: 30%; color: var(--color-primary); }
+.p3 { left: 15%; bottom: 30%; color: var(--color-teal); }
+.p4 { left: 10%; bottom: 10%; color: var(--color-yellow); }
+.p5 { left: 45%; top: 10%; color: var(--color-secondary); }
+.p6 { left: 40%; bottom: 10%; color: var(--color-primary); }
+.p7 { top: 20%; right: 30%; color: var(--color-yellow); }
+.p8 { right: 30%; bottom: 20%; color: var(--color-secondary); }
+.p9 { right: 10%; top: 10%; color: var(--color-secondary); }
+.p10 { top: 45%; right: 20%; color: var(--color-teal); }
+.p11 { bottom: 10%; right: 10%; color: var(--color-yellow); }
 
 @include media-down(sm) {
   .p2 { left: 15%; }

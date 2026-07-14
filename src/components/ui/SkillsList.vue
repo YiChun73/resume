@@ -5,7 +5,7 @@ import SkillCard from '@/components/ui/SkillCard.vue'
 import { useInView } from '@/composables/useInView'
 import { skills } from '@/data/skills'
 
-// Bars start filling once the block reaches the middle of the viewport.
+// Bars start filling once the block rises into the top 60% of the viewport.
 const root = useTemplateRef<HTMLDivElement>('root')
 const isInView = useInView(root, { rootMargin: '0px 0px -40% 0px' })
 </script>
