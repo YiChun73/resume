@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useTemplateRef } from 'vue'
+import { computed, useTemplateRef } from 'vue'
 import { useI18n } from 'vue-i18n'
 
 import SectionTitle from '@/components/ui/SectionTitle.vue'
@@ -8,7 +8,6 @@ import { useInView } from '@/composables/useInView'
 
 const { t, tm, rt } = useI18n()
 
-// the locale is fixed at startup, so the lists can be resolved once
 function localizeEntries(entries: TimelineEntry[]): TimelineEntry[] {
   return entries.map((entry) => ({
     period: rt(entry.period),
@@ -17,8 +16,9 @@ function localizeEntries(entries: TimelineEntry[]): TimelineEntry[] {
   }))
 }
 
-const education = localizeEntries(tm('experience.education'))
-const work = localizeEntries(tm('experience.work'))
+// computed so the lists re-resolve when the locale changes
+const education = computed(() => localizeEntries(tm('experience.education')))
+const work = computed(() => localizeEntries(tm('experience.work')))
 
 const eduCard = useTemplateRef<HTMLDivElement>('eduCard')
 const expCard = useTemplateRef<HTMLDivElement>('expCard')
