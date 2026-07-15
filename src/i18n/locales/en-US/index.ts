@@ -7,6 +7,7 @@ import footer from './footer'
 import hero from './hero'
 import meta from './meta'
 import nav from './nav'
+import notFound from './notFound'
 import portfolio from './portfolio'
 import pricing from './pricing'
 import services from './services'
@@ -26,6 +27,7 @@ const enUS = {
   blog,
   contact,
   footer,
+  notFound,
 }
 
 export type MessageSchema = typeof enUS
