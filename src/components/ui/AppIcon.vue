@@ -42,7 +42,8 @@ const markup = computed(() => registry.get(props.name) ?? '')
     height: 1em;
     width: auto;
 
-    // Font Awesome glyphs carry no fill attribute; own line icons do.
+    // Font Awesome and Simple Line Icons glyphs carry no fill attribute;
+    // the remaining hand-drawn stroke icons set fill="none" themselves.
     &:not([fill]) {
       fill: currentColor;
     }
