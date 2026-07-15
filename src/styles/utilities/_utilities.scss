@@ -50,20 +50,6 @@
   @include visually-hidden;
 }
 
-// Speech-bubble arrows for white cards
-.triangle-top::before {
-  content: '';
-  width: 0;
-  height: 0;
-  border-left: 10px solid transparent;
-  border-right: 10px solid transparent;
-  border-bottom: 10px solid var(--color-surface);
-  position: absolute;
-  left: 50%;
-  top: -10px;
-  transform: translateX(-7.5px);
-}
-
 // Arrow on the left edge (desktop) that flips to the top edge on small screens.
 .triangle-left-md::before {
   @include media-up(md) {

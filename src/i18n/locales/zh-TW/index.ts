@@ -10,10 +10,8 @@ import hero from './hero'
 import meta from './meta'
 import nav from './nav'
 import portfolio from './portfolio'
-import pricing from './pricing'
 import services from './services'
 import notFound from './notFound'
-import testimonials from './testimonials'
 
 // typed against the en-US schema so missing keys fail the build
 const zhTW: MessageSchema = {
@@ -25,8 +23,6 @@ const zhTW: MessageSchema = {
   services,
   experience,
   portfolio,
-  pricing,
-  testimonials,
   blog,
   contact,
   footer,

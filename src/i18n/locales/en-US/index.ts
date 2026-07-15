@@ -9,9 +9,7 @@ import meta from './meta'
 import nav from './nav'
 import notFound from './notFound'
 import portfolio from './portfolio'
-import pricing from './pricing'
 import services from './services'
-import testimonials from './testimonials'
 
 const enUS = {
   meta,
@@ -22,8 +20,6 @@ const enUS = {
   services,
   experience,
   portfolio,
-  pricing,
-  testimonials,
   blog,
   contact,
   footer,

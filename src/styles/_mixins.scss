@@ -13,7 +13,7 @@
   }
 }
 
-// White card used across sections (about, timeline, pricing, testimonial...).
+// White card used across sections (about, timeline...).
 @mixin surface-card {
   background: var(--color-surface);
   border-radius: var(--radius-card);
