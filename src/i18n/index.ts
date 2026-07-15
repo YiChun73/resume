@@ -2,27 +2,18 @@ import { createI18n } from 'vue-i18n'
 
 import enUS, { type MessageSchema } from './locales/en-US'
 import zhTW from './locales/zh-TW'
+import { pickLocale, type SupportLocale } from './pick-locale'
 
-export const SUPPORT_LOCALES = ['zh-TW', 'en-US'] as const
-export type SupportLocale = (typeof SUPPORT_LOCALES)[number]
+export { SUPPORT_LOCALES, type SupportLocale } from './pick-locale'
 
 const messages: Record<SupportLocale, MessageSchema> = {
   'zh-TW': zhTW,
   'en-US': enUS,
 }
 
-/**
- * Picks the locale from the browser's language preferences: any Chinese
- * variant maps to Traditional Chinese, everything else falls back to English.
- */
 function detectLocale(): SupportLocale {
   const candidates = navigator.languages.length ? navigator.languages : [navigator.language]
-  for (const candidate of candidates) {
-    const language = candidate.toLowerCase()
-    if (language.startsWith('zh')) return 'zh-TW'
-    if (language.startsWith('en')) return 'en-US'
-  }
-  return 'en-US'
+  return pickLocale(candidates) ?? 'en-US'
 }
 
 export const i18n = createI18n({
