@@ -14,11 +14,18 @@ interface ContactForm {
   message: string
 }
 
+type SubmitStatus = 'idle' | 'sending' | 'success' | 'error'
+
+const WEB3FORMS_ENDPOINT = 'https://api.web3forms.com/submit'
+const WEB3FORMS_ACCESS_KEY = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY
+
 const { t } = useI18n()
 
 const form = reactive<ContactForm>({ name: '', email: '', subject: '', message: '' })
 const errors = reactive<Partial<Record<keyof ContactForm, string>>>({})
-const sent = ref(false)
+const status = ref<SubmitStatus>('idle')
+// Honeypot: humans never see this field, bots tend to fill every field.
+const botcheck = ref(false)
 
 const info = useTemplateRef<HTMLDivElement>('info')
 const infoVisible = useInView(info)
@@ -41,15 +48,41 @@ function validate(): boolean {
   return Object.keys(found).length === 0
 }
 
-function onSubmit(): void {
-  sent.value = false
+async function onSubmit(): Promise<void> {
+  if (status.value === 'sending') return
+  status.value = 'idle'
   if (!validate()) return
-  // static site: no backend — mimic the original success feedback
-  sent.value = true
-  form.name = ''
-  form.email = ''
-  form.subject = ''
-  form.message = ''
+
+  status.value = 'sending'
+  try {
+    if (!WEB3FORMS_ACCESS_KEY || WEB3FORMS_ACCESS_KEY === 'REPLACE_WITH_YOUR_ACCESS_KEY') {
+      throw new Error('VITE_WEB3FORMS_ACCESS_KEY is not configured')
+    }
+    const response = await fetch(WEB3FORMS_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify({
+        access_key: WEB3FORMS_ACCESS_KEY,
+        botcheck: botcheck.value,
+        name: form.name,
+        email: form.email,
+        subject: form.subject,
+        message: form.message,
+      }),
+    })
+    const result = (await response.json()) as { success?: boolean }
+    if (!response.ok || result.success !== true) {
+      throw new Error(`Web3Forms rejected the submission (HTTP ${response.status})`)
+    }
+    status.value = 'success'
+    form.name = ''
+    form.email = ''
+    form.subject = ''
+    form.message = ''
+  } catch (cause) {
+    console.error('Contact form submission failed:', cause)
+    status.value = 'error'
+  }
 }
 </script>
 
@@ -85,9 +118,23 @@ function onSubmit(): void {
 
         <div class="col-md-8">
           <form class="contact-form" novalidate @submit.prevent="onSubmit">
-            <div v-if="sent" class="alert alert-success" role="status">
+            <div v-if="status === 'success'" class="alert alert-success" role="status">
               {{ t('contact.success') }}
             </div>
+            <div v-else-if="status === 'error'" class="alert alert-danger" role="alert">
+              {{ t('contact.error') }}
+            </div>
+
+            <!-- Honeypot for Web3Forms spam filtering; hidden from humans. -->
+            <input
+              v-model="botcheck"
+              type="checkbox"
+              name="botcheck"
+              tabindex="-1"
+              autocomplete="off"
+              aria-hidden="true"
+              style="display: none"
+            />
 
             <div class="row">
               <div class="col-md-6">
@@ -171,7 +218,9 @@ function onSubmit(): void {
               </div>
             </div>
 
-            <button type="submit" class="btn btn-default">{{ t('contact.send') }}</button>
+            <button type="submit" class="btn btn-default" :disabled="status === 'sending'">
+              {{ status === 'sending' ? t('contact.sending') : t('contact.send') }}
+            </button>
           </form>
         </div>
       </div>

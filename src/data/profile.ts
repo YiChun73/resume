@@ -11,5 +11,5 @@ export interface Profile {
 export const profile: Profile = {
   avatarHero,
   avatarAbout,
-  email: 'name@example.com',
+  email: 'ycWang0107@gmail.com',
 }

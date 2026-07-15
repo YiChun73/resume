@@ -21,6 +21,11 @@
     outline: 2px solid var(--color-secondary);
     outline-offset: 2px;
   }
+
+  &:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+  }
 }
 
 .btn-default {

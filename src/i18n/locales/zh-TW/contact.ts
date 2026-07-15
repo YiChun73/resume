@@ -17,5 +17,7 @@ export default {
     messageRequired: '請填寫訊息內容。',
   },
   send: '送出訊息',
+  sending: '傳送中…',
   success: '訊息已成功送出，我會盡快回覆你！',
+  error: '訊息送出失敗，請稍後再試，或直接寄信給我。',
 }

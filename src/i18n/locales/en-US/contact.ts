@@ -17,5 +17,7 @@ export default {
     messageRequired: 'Message is required.',
   },
   send: 'Send Message',
+  sending: 'Sending…',
   success: 'Your message has been sent successfully.',
+  error: 'Your message could not be sent. Please try again later, or email me directly.',
 }
