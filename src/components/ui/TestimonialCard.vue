@@ -10,7 +10,7 @@ defineProps<{
 <template>
   <div class="testimonial-item text-center">
     <div class="thumb">
-      <img :src="avatar" :alt="name" width="90" height="90" />
+      <img :src="avatar" :alt="name" width="90" height="90" loading="lazy" decoding="async" />
     </div>
     <h3 class="name">{{ name }}</h3>
     <span class="subtitle">{{ role }}</span>

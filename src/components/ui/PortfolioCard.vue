@@ -50,7 +50,14 @@ const externalUrl = computed(() =>
         </span>
       </span>
       <span class="thumb">
-        <img :src="item.thumbnail" :alt="title" />
+        <img
+          :src="item.thumbnail"
+          :alt="title"
+          width="560"
+          height="454"
+          loading="lazy"
+          decoding="async"
+        />
         <span class="mask" />
       </span>
     </span>
@@ -85,6 +92,7 @@ const externalUrl = computed(() =>
   img {
     display: block;
     width: 100%;
+    height: auto;
   }
 }
 

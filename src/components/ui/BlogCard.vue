@@ -23,7 +23,7 @@ const { t } = useI18n()
       <!-- duplicate of the title link below: hidden from the tab order and AT -->
       <a :href="post.url" aria-hidden="true" tabindex="-1">
         <span class="category">{{ t(`blog.posts.${post.id}.category`) }}</span>
-        <img :src="post.image" alt="" />
+        <img :src="post.image" alt="" width="529" height="345" loading="lazy" decoding="async" />
       </a>
     </div>
     <div class="details">
@@ -57,6 +57,7 @@ const { t } = useI18n()
 
   img {
     width: 100%;
+    height: auto;
     transform: scale(1);
     transition: var(--transition-base);
   }

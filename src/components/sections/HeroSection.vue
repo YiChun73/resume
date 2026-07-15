@@ -22,12 +22,14 @@ useMouseParallax(scene)
   <section id="home" class="home">
     <div class="container">
       <div class="intro">
+        <!-- above the fold and the LCP candidate: keep eager, hint the preload scanner -->
         <img
           :src="profile.avatarHero"
           :alt="t('hero.name')"
           class="avatar"
           width="108"
           height="108"
+          fetchpriority="high"
         />
 
         <h1>{{ t('hero.name') }}</h1>

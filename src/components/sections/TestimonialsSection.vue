@@ -69,7 +69,14 @@ const slides = firstTestimonial ? [...testimonials, firstTestimonial] : testimon
       <div class="row">
         <div v-for="client in clients" :key="client.name" class="col-md-3 col-6">
           <div class="client-item">
-            <img :src="client.logo" :alt="client.name" width="48" height="48" />
+            <img
+              :src="client.logo"
+              :alt="client.name"
+              width="48"
+              height="48"
+              loading="lazy"
+              decoding="async"
+            />
           </div>
         </div>
       </div>

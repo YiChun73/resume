@@ -23,7 +23,14 @@ const factsVisible = useInView(factsRow)
       <div class="row">
         <div class="col-md-3">
           <div class="avatar-col">
-            <img :src="profile.avatarAbout" :alt="t('hero.name')" width="150" height="150" />
+            <img
+              :src="profile.avatarAbout"
+              :alt="t('hero.name')"
+              width="150"
+              height="150"
+              loading="lazy"
+              decoding="async"
+            />
           </div>
         </div>
 

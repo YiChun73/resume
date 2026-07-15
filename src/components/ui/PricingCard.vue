@@ -19,7 +19,7 @@ const name = computed(() => t(`pricing.plans.${props.plan.id}.name`))
     :class="{ best: plan.recommended }"
   >
     <span v-if="plan.recommended" class="badge">{{ t('pricing.recommended') }}</span>
-    <img :src="plan.image" :alt="name" width="70" height="81" />
+    <img :src="plan.image" :alt="name" width="70" height="81" loading="lazy" decoding="async" />
     <h3 class="plan">{{ name }}</h3>
     <p>{{ t(`pricing.plans.${plan.id}.description`) }}</p>
     <p>{{ t(`pricing.plans.${plan.id}.support`) }}</p>

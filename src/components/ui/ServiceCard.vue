@@ -19,7 +19,7 @@ const title = computed(() => t(`services.items.${props.service.id}.title`))
     :class="[`shadow-${service.shadow}`, { 'service-box--light': service.light }]"
     :style="{ background: service.background }"
   >
-    <img :src="service.image" :alt="title" width="80" height="80" />
+    <img :src="service.image" :alt="title" width="80" height="80" loading="lazy" decoding="async" />
     <h3>{{ title }}</h3>
     <p>{{ t(`services.items.${service.id}.description`) }}</p>
   </div>
