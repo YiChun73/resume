@@ -86,7 +86,11 @@
 
   &.is-visible {
     visibility: visible;
-    animation: fade-in-up 1s both;
+    // `backwards`, not `both`: it still holds the `from` state through the
+    // stagger delay, but stops applying once the animation ends — a filling
+    // transform (even the identity) would keep the element a stacking context
+    // forever, letting e.g. the timeline's line paint over the markers
+    animation: fade-in-up 1s backwards;
   }
 
   &.reveal--fade.is-visible {

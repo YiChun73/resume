@@ -45,10 +45,14 @@ defineProps<{
   }
 }
 
-// sits on top of the vertical line drawn by the parent card
+// sits on top of the vertical line drawn by the parent card; the vertical
+// padding reproduces the reference's icon-font line box (line-height 1.7 on a
+// 1em glyph → (1.7 - 1) / 2 above and below), so the white background masks
+// the line with a visible gap around the glyph
 .marker {
   background: #fff;
   color: var(--color-primary);
+  padding: 0.35em 0;
   position: absolute;
   left: -7px;
   top: 0;
