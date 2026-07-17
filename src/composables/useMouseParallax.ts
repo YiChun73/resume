@@ -4,16 +4,17 @@ import { prefersReducedMotion } from '@/utils/prefers-reduced-motion'
 
 interface ParallaxLayer {
   el: HTMLElement
-  depthX: number
-  depthY: number
+  depth: number
   x: number
   y: number
 }
 
 /**
  * Mouse parallax for the hero shapes. Children of `scene` carrying a
- * `data-depth` attribute drift against the pointer, eased with rAF lerp
- * (replaces the original parallax.js `relativeInput` behaviour).
+ * `data-depth` attribute drift against the pointer, eased with rAF lerp.
+ * Mirrors parallax.js `relativeInput` semantics: input normalised to ±1
+ * about the scene centre, layers offset by depth × 10% of the scene size,
+ * eased with a 0.1 friction.
  */
 export function useMouseParallax(scene: Readonly<Ref<HTMLElement | null>>): void {
   let layers: ParallaxLayer[] = []
@@ -25,8 +26,8 @@ export function useMouseParallax(scene: Readonly<Ref<HTMLElement | null>>): void
   function onPointerMove(event: PointerEvent): void {
     if (!scene.value) return
     const rect = scene.value.getBoundingClientRect()
-    const relX = (event.clientX - rect.left) / rect.width - 0.5
-    const relY = (event.clientY - rect.top) / rect.height - 0.5
+    const relX = (event.clientX - rect.left - rect.width / 2) / (rect.width / 2)
+    const relY = (event.clientY - rect.top - rect.height / 2) / (rect.height / 2)
     targetX = -relX
     targetY = -relY
     if (!running) {
@@ -40,10 +41,10 @@ export function useMouseParallax(scene: Readonly<Ref<HTMLElement | null>>): void
     const rect = scene.value.getBoundingClientRect()
     let settled = true
     for (const layer of layers) {
-      const destX = targetX * layer.depthX * rect.width * 0.1
-      const destY = targetY * layer.depthY * rect.height * 0.1
-      layer.x += (destX - layer.x) * 0.08
-      layer.y += (destY - layer.y) * 0.08
+      const destX = targetX * layer.depth * rect.width * 0.1
+      const destY = targetY * layer.depth * rect.height * 0.1
+      layer.x += (destX - layer.x) * 0.1
+      layer.y += (destY - layer.y) * 0.1
       if (Math.abs(destX - layer.x) > 0.1 || Math.abs(destY - layer.y) > 0.1) settled = false
       layer.el.style.transform = `translate3d(${layer.x.toFixed(2)}px, ${layer.y.toFixed(2)}px, 0)`
     }
@@ -57,11 +58,12 @@ export function useMouseParallax(scene: Readonly<Ref<HTMLElement | null>>): void
   onMounted(() => {
     if (!scene.value) return
     if (prefersReducedMotion()) return
-    layers = Array.from(scene.value.querySelectorAll<HTMLElement>('[data-depth]')).map((el) => {
-      const depthX = Number(el.dataset.depth ?? 0)
-      const depthY = el.dataset.depthY !== undefined ? Number(el.dataset.depthY) : depthX
-      return { el, depthX, depthY, x: 0, y: 0 }
-    })
+    layers = Array.from(scene.value.querySelectorAll<HTMLElement>('[data-depth]')).map((el) => ({
+      el,
+      depth: Number(el.dataset.depth ?? 0),
+      x: 0,
+      y: 0,
+    }))
     window.addEventListener('pointermove', onPointerMove, { passive: true })
   })
 
