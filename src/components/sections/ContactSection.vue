@@ -1,89 +1,20 @@
 <script setup lang="ts">
-import { reactive, ref, useTemplateRef } from 'vue'
+import { useTemplateRef } from 'vue'
 import { useI18n } from 'vue-i18n'
 
 import mapBackground from '@/assets/images/map.svg'
+import FormField from '@/components/ui/FormField.vue'
 import SectionTitle from '@/components/ui/SectionTitle.vue'
+import { useContactForm } from '@/composables/useContactForm'
 import { useInView } from '@/composables/useInView'
 import { profile } from '@/data/profile'
 
-interface ContactForm {
-  name: string
-  email: string
-  subject: string
-  message: string
-}
-
-type SubmitStatus = 'idle' | 'sending' | 'success' | 'error'
-
-const WEB3FORMS_ENDPOINT = 'https://api.web3forms.com/submit'
-const WEB3FORMS_ACCESS_KEY = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY
-
 const { t } = useI18n()
 
-const form = reactive<ContactForm>({ name: '', email: '', subject: '', message: '' })
-const errors = reactive<Partial<Record<keyof ContactForm, string>>>({})
-const status = ref<SubmitStatus>('idle')
-// Honeypot: humans never see this field, bots tend to fill every field.
-const botcheck = ref(false)
+const { form, errors, status, botcheck, onSubmit } = useContactForm()
 
 const info = useTemplateRef<HTMLDivElement>('info')
 const infoVisible = useInView(info)
-
-const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-
-function validate(): boolean {
-  const found: Partial<Record<keyof ContactForm, string>> = {}
-  if (!form.name.trim()) found.name = t('contact.errors.nameRequired')
-  if (!form.subject.trim()) found.subject = t('contact.errors.subjectRequired')
-  if (!form.message.trim()) found.message = t('contact.errors.messageRequired')
-  if (!form.email.trim()) found.email = t('contact.errors.emailRequired')
-  else if (!EMAIL_PATTERN.test(form.email)) found.email = t('contact.errors.emailInvalid')
-
-  for (const field of ['name', 'email', 'subject', 'message'] as const) {
-    const message = found[field]
-    if (message) errors[field] = message
-    else delete errors[field]
-  }
-  return Object.keys(found).length === 0
-}
-
-async function onSubmit(): Promise<void> {
-  if (status.value === 'sending') return
-  status.value = 'idle'
-  if (!validate()) return
-
-  status.value = 'sending'
-  try {
-    if (!WEB3FORMS_ACCESS_KEY || WEB3FORMS_ACCESS_KEY === 'REPLACE_WITH_YOUR_ACCESS_KEY') {
-      throw new Error('VITE_WEB3FORMS_ACCESS_KEY is not configured')
-    }
-    const response = await fetch(WEB3FORMS_ENDPOINT, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-      body: JSON.stringify({
-        access_key: WEB3FORMS_ACCESS_KEY,
-        botcheck: botcheck.value,
-        name: form.name,
-        email: form.email,
-        subject: form.subject,
-        message: form.message,
-      }),
-    })
-    const result = (await response.json()) as { success?: boolean }
-    if (!response.ok || result.success !== true) {
-      throw new Error(`Web3Forms rejected the submission (HTTP ${response.status})`)
-    }
-    status.value = 'success'
-    form.name = ''
-    form.email = ''
-    form.subject = ''
-    form.message = ''
-  } catch (cause) {
-    console.error('Contact form submission failed:', cause)
-    status.value = 'error'
-  }
-}
 </script>
 
 <template>
@@ -138,83 +69,45 @@ async function onSubmit(): Promise<void> {
 
             <div class="row">
               <div class="col-md-6">
-                <div class="form-group">
-                  <label class="visually-hidden" for="contact-name">
-                    {{ t('contact.form.name') }}
-                  </label>
-                  <input
-                    id="contact-name"
-                    v-model="form.name"
-                    type="text"
-                    name="name"
-                    class="form-control"
-                    :placeholder="t('contact.form.name')"
-                    required
-                    :aria-invalid="Boolean(errors.name)"
-                    aria-describedby="contact-name-error"
-                  />
-                  <div id="contact-name-error" class="help-block">{{ errors.name }}</div>
-                </div>
+                <FormField
+                  id="contact-name"
+                  v-model="form.name"
+                  name="name"
+                  :label="t('contact.form.name')"
+                  :error="errors.name"
+                />
               </div>
 
               <div class="col-md-6">
-                <div class="form-group">
-                  <label class="visually-hidden" for="contact-email">
-                    {{ t('contact.form.email') }}
-                  </label>
-                  <input
-                    id="contact-email"
-                    v-model="form.email"
-                    type="email"
-                    name="email"
-                    class="form-control"
-                    :placeholder="t('contact.form.email')"
-                    required
-                    :aria-invalid="Boolean(errors.email)"
-                    aria-describedby="contact-email-error"
-                  />
-                  <div id="contact-email-error" class="help-block">{{ errors.email }}</div>
-                </div>
+                <FormField
+                  id="contact-email"
+                  v-model="form.email"
+                  name="email"
+                  type="email"
+                  :label="t('contact.form.email')"
+                  :error="errors.email"
+                />
               </div>
 
               <div class="col-md-12">
-                <div class="form-group">
-                  <label class="visually-hidden" for="contact-subject">
-                    {{ t('contact.form.subject') }}
-                  </label>
-                  <input
-                    id="contact-subject"
-                    v-model="form.subject"
-                    type="text"
-                    name="subject"
-                    class="form-control"
-                    :placeholder="t('contact.form.subject')"
-                    required
-                    :aria-invalid="Boolean(errors.subject)"
-                    aria-describedby="contact-subject-error"
-                  />
-                  <div id="contact-subject-error" class="help-block">{{ errors.subject }}</div>
-                </div>
+                <FormField
+                  id="contact-subject"
+                  v-model="form.subject"
+                  name="subject"
+                  :label="t('contact.form.subject')"
+                  :error="errors.subject"
+                />
               </div>
 
               <div class="col-md-12">
-                <div class="form-group">
-                  <label class="visually-hidden" for="contact-message">
-                    {{ t('contact.form.message') }}
-                  </label>
-                  <textarea
-                    id="contact-message"
-                    v-model="form.message"
-                    name="message"
-                    class="form-control"
-                    rows="5"
-                    :placeholder="t('contact.form.message')"
-                    required
-                    :aria-invalid="Boolean(errors.message)"
-                    aria-describedby="contact-message-error"
-                  />
-                  <div id="contact-message-error" class="help-block">{{ errors.message }}</div>
-                </div>
+                <FormField
+                  id="contact-message"
+                  v-model="form.message"
+                  name="message"
+                  multiline
+                  :label="t('contact.form.message')"
+                  :error="errors.message"
+                />
               </div>
             </div>
 
@@ -242,9 +135,5 @@ async function onSubmit(): Promise<void> {
   @include media-down(md) {
     margin-bottom: 30px;
   }
-}
-
-.help-block {
-  min-height: 20px;
 }
 </style>
