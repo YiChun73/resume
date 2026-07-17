@@ -1,9 +1,11 @@
+import { prefersReducedMotion } from '@/utils/prefers-reduced-motion'
+
 function easeInOutQuad(t: number): number {
   return t < 0.5 ? 2 * t * t : 1 - (-2 * t + 2) ** 2 / 2
 }
 
 function animateScrollTo(targetY: number, duration: number): void {
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  if (prefersReducedMotion()) {
     window.scrollTo(0, targetY)
     return
   }

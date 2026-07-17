@@ -1,3 +1,18 @@
+<script lang="ts">
+// Module scope: the registry is built once, not per icon instance.
+const modules = import.meta.glob<string>('@/assets/icons/*.svg', {
+  query: '?raw',
+  import: 'default',
+  eager: true,
+})
+
+const registry = new Map<string, string>()
+for (const [path, svg] of Object.entries(modules)) {
+  const file = path.split('/').pop()
+  if (file) registry.set(file.replace('.svg', ''), svg)
+}
+</script>
+
 <script setup lang="ts">
 import { computed } from 'vue'
 
@@ -11,18 +26,6 @@ const props = withDefaults(
   }>(),
   { size: '1em' },
 )
-
-const modules = import.meta.glob<string>('@/assets/icons/*.svg', {
-  query: '?raw',
-  import: 'default',
-  eager: true,
-})
-
-const registry = new Map<string, string>()
-for (const [path, svg] of Object.entries(modules)) {
-  const file = path.split('/').pop()
-  if (file) registry.set(file.replace('.svg', ''), svg)
-}
 
 const markup = computed(() => registry.get(props.name) ?? '')
 </script>

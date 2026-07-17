@@ -1,5 +1,7 @@
 import { onBeforeUnmount, onMounted, type Ref } from 'vue'
 
+import { prefersReducedMotion } from '@/utils/prefers-reduced-motion'
+
 interface ParallaxLayer {
   el: HTMLElement
   depthX: number
@@ -54,7 +56,7 @@ export function useMouseParallax(scene: Readonly<Ref<HTMLElement | null>>): void
 
   onMounted(() => {
     if (!scene.value) return
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    if (prefersReducedMotion()) return
     layers = Array.from(scene.value.querySelectorAll<HTMLElement>('[data-depth]')).map((el) => {
       const depthX = Number(el.dataset.depth ?? 0)
       const depthY = el.dataset.depthY !== undefined ? Number(el.dataset.depthY) : depthX

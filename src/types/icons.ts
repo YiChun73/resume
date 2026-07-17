@@ -20,5 +20,4 @@ export type IconName =
   | 'people'
   | 'picture'
   | 'pinterest-p'
-  | 'spinner'
   | 'twitter'

@@ -2,7 +2,6 @@
 import { computed, ref, useTemplateRef } from 'vue'
 import { useI18n } from 'vue-i18n'
 
-import AppIcon from '@/components/ui/AppIcon.vue'
 import AppLightbox from '@/components/ui/AppLightbox.vue'
 import PortfolioCard from '@/components/ui/PortfolioCard.vue'
 import SectionTitle from '@/components/ui/SectionTitle.vue'
@@ -19,7 +18,6 @@ const { t } = useI18n()
 
 const items = ref<PortfolioItem[]>([...portfolioItems])
 const activeFilter = ref<PortfolioCategory | null>(null)
-const loading = ref(false)
 const allLoaded = ref(false)
 const lightboxItem = ref<PortfolioItem | null>(null)
 
@@ -57,13 +55,8 @@ function onSelectFilter(event: Event): void {
 }
 
 function loadMore(): void {
-  if (loading.value) return
-  loading.value = true
-  window.setTimeout(() => {
-    items.value = [...items.value, ...portfolioItemsPage2]
-    loading.value = false
-    allLoaded.value = true
-  }, 1000)
+  items.value = [...items.value, ...portfolioItemsPage2]
+  allLoaded.value = true
 }
 </script>
 
@@ -112,8 +105,7 @@ function loadMore(): void {
       </TransitionGroup>
 
       <div v-if="!allLoaded" class="load-more text-center">
-        <button type="button" class="btn btn-default" :disabled="loading" @click="loadMore">
-          <AppIcon v-show="loading" class="spinner" name="spinner" size="16px" />
+        <button type="button" class="btn btn-default" @click="loadMore">
           {{ t('portfolio.loadMore') }}
         </button>
       </div>
@@ -186,16 +178,6 @@ function loadMore(): void {
 
 .load-more {
   margin-top: 1.5rem;
-
-  .spinner {
-    margin-right: 10px;
-    animation: spin 1s linear infinite;
-  }
-
-  .btn:disabled {
-    opacity: 1;
-    cursor: not-allowed;
-  }
 }
 
 // filtering: fade/scale items in and out, glide survivors to their new spot

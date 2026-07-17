@@ -1,5 +1,7 @@
 import { computed, onBeforeUnmount, ref, watch, type ComputedRef, type Ref } from 'vue'
 
+import { prefersReducedMotion } from '@/utils/prefers-reduced-motion'
+
 /**
  * Animates a number from 0 to `value` once `active` becomes true
  * (2s, matching the original counter behaviour).
@@ -26,7 +28,7 @@ export function useCountUp(
     active,
     (visible) => {
       if (!visible) return
-      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      if (prefersReducedMotion()) {
         current.value = value
         return
       }
