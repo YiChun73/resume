@@ -27,19 +27,8 @@ function onNavClick(target: NavTarget): void {
           :aria-label="t('nav.brandHome')"
           @click.prevent="onNavClick('home')"
         >
-          <svg width="107" height="33" viewBox="0 0 107 33" aria-hidden="true">
-            <text
-              x="0"
-              y="25"
-              font-family="Rubik, sans-serif"
-              font-size="26"
-              font-weight="700"
-              fill="#fff"
-            >
-              {{ t('common.brand') }}
-            </text>
-            <circle cx="76" cy="24" r="4" fill="#ff4c60" />
-          </svg>
+          <span aria-hidden="true">{{ t('common.brand') }}</span>
+          <span class="brand-dot" aria-hidden="true"></span>
         </a>
 
         <button
@@ -101,6 +90,21 @@ function onNavClick(target: NavTarget): void {
 
 .navbar-brand {
   display: inline-flex;
+  align-items: baseline;
+  color: #fff;
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 33px;
+}
+
+// Matches the reference logo's period: a 6.6px rounded square sitting on the baseline.
+.brand-dot {
+  display: inline-block;
+  width: 6.6px;
+  height: 6.6px;
+  margin-left: 2px;
+  border-radius: 1px;
+  background: var(--color-primary);
 }
 
 .navbar-toggler {
