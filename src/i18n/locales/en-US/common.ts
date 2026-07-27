@@ -1,5 +1,5 @@
 export default {
-  brand: 'Bolby',
+  brand: 'Adrien',
   mainNav: 'Main navigation',
   toggleNav: 'Toggle navigation',
   backToTop: 'Back to top',

@@ -1,6 +1,6 @@
 export default {
   title: 'About Me',
-  bio: 'I am Bolby Doe, web developer from London, United Kingdom. I have rich experience in web site design and building and customization, also I am good at WordPress.',
+  bio: 'I am Adrien Wang, web developer from London, United Kingdom. I have rich experience in web site design and building and customization, also I am good at WordPress.',
   downloadCv: 'Download CV',
   skills: {
     development: 'Development',

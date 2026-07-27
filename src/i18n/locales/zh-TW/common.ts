@@ -1,5 +1,5 @@
 export default {
-  brand: 'Bolby',
+  brand: 'Adrien',
   mainNav: '主選單',
   toggleNav: '開關導覽選單',
   backToTop: '回到頁面頂端',

@@ -6,5 +6,5 @@ export default {
   works: '作品',
   blog: '部落格',
   contact: '聯絡我',
-  brandHome: 'Bolby — 回首頁',
+  brandHome: 'Adrien — 回首頁',
 }

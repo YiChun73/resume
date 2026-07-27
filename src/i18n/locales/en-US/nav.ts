@@ -6,5 +6,5 @@ export default {
   works: 'Works',
   blog: 'Blog',
   contact: 'Contact',
-  brandHome: 'Bolby — home',
+  brandHome: 'Adrien — home',
 }

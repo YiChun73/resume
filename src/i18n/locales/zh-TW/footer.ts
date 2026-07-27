@@ -1,3 +1,3 @@
 export default {
-  copyright: '© 2020 Bolby Template.',
+  copyright: '© 2020 Adrien Template.',
 }

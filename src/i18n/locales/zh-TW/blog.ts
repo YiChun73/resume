@@ -1,6 +1,6 @@
 export default {
   title: '最新文章',
-  author: 'Bolby',
+  author: 'Adrien',
   posts: {
     tools: {
       title: '五款助你完成專案的 App 開發工具',
