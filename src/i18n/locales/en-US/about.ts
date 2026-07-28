@@ -1,6 +1,6 @@
 export default {
   title: 'About Me',
-  bio: 'I am Adrien Wang, web developer from London, United Kingdom. I have rich experience in web site design and building and customization, also I am good at WordPress.',
+  bio: 'I am Adrien Wang, a senior frontend engineer. With years of focused frontend development experience, I work fluently with Vue, React, and Angular, specialise in building high-performance and maintainable web applications, and bring a track record of cross-team collaboration on large-scale projects.',
   downloadCv: 'Download CV',
   skills: {
     development: 'Development',
