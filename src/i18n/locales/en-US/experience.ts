@@ -1,6 +1,3 @@
-const description =
-  'Lorem ipsum dolor sit amet quo ei simul congue exerci ad nec admodum perfecto.'
-
 export default {
   title: 'Experience',
   education: [
@@ -24,8 +21,23 @@ export default {
     },
   ],
   work: [
-    { period: '2019 - Present', title: 'Web Designer', description },
-    { period: '2017 - 2013', title: 'Front-End Developer', description },
-    { period: '2013 - 2009', title: 'Back-End Developer', description },
+    {
+      period: '2023 - Present',
+      title: 'Senior Frontend Engineer — Fengcai Co., Ltd.',
+      description:
+        'Lead front-end architecture and coding standards, build a reusable component system, and drive the adoption of a modern toolchain and code-quality practices.',
+    },
+    {
+      period: '2021 - 2023',
+      title: 'Frontend Engineer — NTT DATA Taiwan',
+      description:
+        'Built front-ends for enterprise systems, delivered large-scale projects with cross-team collaboration, and continuously improved interface performance and user experience.',
+    },
+    {
+      period: '2020 - 2021',
+      title: 'Web Developer — Fangdiwang Co., Ltd.',
+      description:
+        'One of only two engineers, covering front-end, back-end, and Android (Kotlin) app development end to end — from requirements through release and maintenance.',
+    },
   ],
 }
