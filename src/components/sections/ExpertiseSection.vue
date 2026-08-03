@@ -1,31 +1,31 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
 
+import ExpertiseCard from '@/components/ui/ExpertiseCard.vue'
 import SectionTitle from '@/components/ui/SectionTitle.vue'
-import ServiceCard from '@/components/ui/ServiceCard.vue'
 import { useSmoothScroll } from '@/composables/useSmoothScroll'
-import { services } from '@/data/services'
+import { expertiseAreas } from '@/data/expertise'
 
 const { t } = useI18n()
 const { scrollToSection } = useSmoothScroll()
 </script>
 
 <template>
-  <section id="services">
+  <section id="expertise">
     <div class="container">
-      <SectionTitle :title="t('services.title')" />
+      <SectionTitle :title="t('expertise.title')" />
 
       <div class="row">
-        <div v-for="service in services" :key="service.id" class="col-md-4 service-col">
-          <ServiceCard :service="service" />
+        <div v-for="area in expertiseAreas" :key="area.id" class="col-md-4 area-col">
+          <ExpertiseCard :area="area" />
         </div>
       </div>
 
-      <div class="custom-job text-center">
-        <i18n-t keypath="services.note" tag="p" scope="global">
+      <div class="contact-note text-center">
+        <i18n-t keypath="expertise.note" tag="p" scope="global">
           <template #link>
             <a href="#contact" @click.prevent="scrollToSection('contact')">
-              {{ t('services.noteLink') }}
+              {{ t('expertise.noteLink') }}
             </a>
           </template>
         </i18n-t>
@@ -36,12 +36,12 @@ const { scrollToSection } = useSmoothScroll()
 
 <style scoped lang="scss">
 @include media-down(md) {
-  .service-col:not(:last-child) {
+  .area-col:not(:last-child) {
     margin-bottom: 30px;
   }
 }
 
-.custom-job {
+.contact-note {
   margin-top: 3rem;
 
   p {

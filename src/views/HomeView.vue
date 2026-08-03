@@ -3,16 +3,16 @@ import AboutSection from '@/components/sections/AboutSection.vue'
 import BlogSection from '@/components/sections/BlogSection.vue'
 import ContactSection from '@/components/sections/ContactSection.vue'
 import ExperienceSection from '@/components/sections/ExperienceSection.vue'
+import ExpertiseSection from '@/components/sections/ExpertiseSection.vue'
 import HeroSection from '@/components/sections/HeroSection.vue'
 import PortfolioSection from '@/components/sections/PortfolioSection.vue'
-import ServicesSection from '@/components/sections/ServicesSection.vue'
 </script>
 
 <template>
   <main>
     <HeroSection />
     <AboutSection />
-    <ServicesSection />
+    <ExpertiseSection />
     <ExperienceSection />
     <PortfolioSection />
     <BlogSection />

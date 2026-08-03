@@ -1,7 +1,7 @@
 export default {
   home: 'Home',
   about: 'About',
-  services: 'Services',
+  expertise: 'Expertise',
   experience: 'Experience',
   works: 'Works',
   blog: 'Blog',

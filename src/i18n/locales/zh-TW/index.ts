@@ -5,12 +5,12 @@ import blog from './blog'
 import common from './common'
 import contact from './contact'
 import experience from './experience'
+import expertise from './expertise'
 import footer from './footer'
 import hero from './hero'
 import meta from './meta'
 import nav from './nav'
 import portfolio from './portfolio'
-import services from './services'
 import notFound from './notFound'
 
 // typed against the en-US schema so missing keys fail the build
@@ -20,7 +20,7 @@ const zhTW: MessageSchema = {
   nav,
   hero,
   about,
-  services,
+  expertise,
   experience,
   portfolio,
   blog,
