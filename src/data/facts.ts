@@ -1,7 +1,7 @@
 import type { IconName } from '@/types/icons'
 
 // Labels come from the `about.facts` locale messages.
-export type FactId = 'projects' | 'coffee' | 'clients' | 'awards'
+export type FactId = 'experience' | 'frameworks' | 'teams'
 
 export interface Fact {
   id: FactId
@@ -10,8 +10,7 @@ export interface Fact {
 }
 
 export const facts: Fact[] = [
-  { id: 'projects', icon: 'fire', value: 198 },
-  { id: 'coffee', icon: 'cup', value: 5670 },
-  { id: 'clients', icon: 'people', value: 427 },
-  { id: 'awards', icon: 'badge', value: 35 },
+  { id: 'experience', icon: 'fire', value: 6 },
+  { id: 'frameworks', icon: 'badge', value: 3 },
+  { id: 'teams', icon: 'briefcase', value: 3 },
 ]

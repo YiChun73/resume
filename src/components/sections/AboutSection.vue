@@ -50,7 +50,7 @@ const factsVisible = useInView(factsRow)
       </div>
 
       <div ref="factsRow" class="row facts-row">
-        <div v-for="fact in facts" :key="fact.id" class="col-md-3 col-sm-6 fact-col">
+        <div v-for="fact in facts" :key="fact.id" class="col-md-4 col-sm-6 fact-col">
           <FactCard :fact="fact" :active="factsVisible" />
         </div>
       </div>

@@ -10,7 +10,7 @@ export interface Skill {
 }
 
 export const skills: Skill[] = [
-  { id: 'development', level: 85, color: 'var(--color-yellow)' },
-  { id: 'uiux', level: 95, color: 'var(--color-primary)' },
+  { id: 'development', level: 95, color: 'var(--color-yellow)' },
+  { id: 'uiux', level: 80, color: 'var(--color-primary)' },
   { id: 'photography', level: 70, color: 'var(--color-secondary)' },
 ]
