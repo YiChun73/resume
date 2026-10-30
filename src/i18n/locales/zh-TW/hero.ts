@@ -1,3 +1,5 @@
+import type { MessageSchema } from '../en-US'
+
 export default {
   name: 'Adrien Wang',
   // trailing space intended: CJK/Latin spacing before the rotating role
@@ -9,4 +11,4 @@ export default {
   },
   hireMe: '與我合作',
   scrollDown: '往下滑',
-}
+} satisfies MessageSchema['hero']

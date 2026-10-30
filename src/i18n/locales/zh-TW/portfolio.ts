@@ -1,3 +1,5 @@
+import type { MessageSchema } from '../en-US'
+
 export default {
   title: '近期作品',
   filterAll: '全部',
@@ -24,4 +26,4 @@ export default {
     details: '設計上沿用品牌主色與圓角語彙，維持整體視覺一致性，並針對小螢幕優化排版與可讀性。',
     cta: '在 Dribbble 查看',
   },
-}
+} satisfies MessageSchema['portfolio']

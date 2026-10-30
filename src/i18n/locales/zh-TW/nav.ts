@@ -1,3 +1,5 @@
+import type { MessageSchema } from '../en-US'
+
 export default {
   home: '首頁',
   about: '關於我',
@@ -7,4 +9,4 @@ export default {
   blog: '部落格',
   contact: '聯絡我',
   brandHome: 'Adrien — 回首頁',
-}
+} satisfies MessageSchema['nav']

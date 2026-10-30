@@ -1,3 +1,5 @@
+import type { MessageSchema } from '../en-US'
+
 export default {
   title: '學經歷',
   education: {
@@ -35,4 +37,4 @@ export default {
         '兩人工程團隊成員，橫跨前端、後端與 Android（Kotlin）App 開發，從需求討論到上線維運一手完成。',
     },
   },
-}
+} satisfies MessageSchema['experience']

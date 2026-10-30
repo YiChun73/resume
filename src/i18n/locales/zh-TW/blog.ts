@@ -1,3 +1,5 @@
+import type { MessageSchema } from '../en-US'
+
 export default {
   title: '最新文章',
   author: 'Adrien',
@@ -18,4 +20,4 @@ export default {
       date: '2020 年 2 月 6 日',
     },
   },
-}
+} satisfies MessageSchema['blog']

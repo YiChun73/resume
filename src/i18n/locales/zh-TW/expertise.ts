@@ -1,3 +1,5 @@
+import type { MessageSchema } from '../en-US'
+
 export default {
   title: '專長領域',
   items: {
@@ -16,4 +18,4 @@ export default {
   },
   note: '想聊聊合作或職缺嗎？{link}與我聯繫！👋',
   noteLink: '點這裡',
-}
+} satisfies MessageSchema['expertise']

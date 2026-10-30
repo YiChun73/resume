@@ -1,3 +1,5 @@
+import type { MessageSchema } from '../en-US'
+
 export default {
   title: '聯絡我',
   heading: '有任何想法，歡迎聊聊！',
@@ -20,4 +22,4 @@ export default {
   sending: '傳送中…',
   success: '訊息已成功送出，我會盡快回覆你！',
   error: '訊息送出失敗，請稍後再試，或直接寄信給我。',
-}
+} satisfies MessageSchema['contact']
