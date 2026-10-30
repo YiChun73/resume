@@ -42,13 +42,6 @@ function closeLightbox(): void {
   lightboxItem.value = null
 }
 
-function onSelectFilter(event: Event): void {
-  const select = event.target
-  if (!(select instanceof HTMLSelectElement)) return
-  const match = portfolioFilters.find((filter) => (filter ?? '') === select.value)
-  activeFilter.value = match ?? null
-}
-
 function loadMore(): void {
   items.value = [...items.value, ...portfolioItemsPage2]
   allLoaded.value = true
@@ -64,6 +57,7 @@ function loadMore(): void {
         ref="filterBar"
         class="portfolio-filter list-inline reveal"
         :class="{ 'is-visible': filterVisible }"
+        :aria-label="t('portfolio.filterLabel')"
       >
         <li v-for="filter in portfolioFilters" :key="filter ?? 'all'" class="list-inline-item">
           <button
@@ -76,22 +70,6 @@ function loadMore(): void {
           </button>
         </li>
       </ul>
-
-      <div class="pf-filter-wrapper">
-        <label class="visually-hidden" for="portfolio-filter-select">
-          {{ t('portfolio.filterLabel') }}
-        </label>
-        <select
-          id="portfolio-filter-select"
-          class="portfolio-filter-mobile"
-          :value="activeFilter ?? ''"
-          @change="onSelectFilter"
-        >
-          <option v-for="filter in portfolioFilters" :key="filter ?? 'all'" :value="filter ?? ''">
-            {{ filterLabel(filter) }}
-          </option>
-        </select>
-      </div>
 
       <TransitionGroup name="pf" tag="div" class="row portfolio-wrapper">
         <div v-for="item in filteredItems" :key="item.id" class="col-sm-6 col-md-4 grid-item">
@@ -130,28 +108,6 @@ function loadMore(): void {
       color: var(--color-primary);
     }
   }
-
-  @include media-down(md) {
-    display: none;
-  }
-}
-
-.pf-filter-wrapper {
-  display: none;
-
-  @include media-down(md) {
-    display: block;
-  }
-}
-
-.portfolio-filter-mobile {
-  font-size: 16px;
-  border: 1px solid var(--color-icon-muted);
-  border-radius: 10px;
-  background: var(--color-surface);
-  padding: 8px 12px;
-  margin-bottom: 30px;
-  width: 100%;
 }
 
 .portfolio-wrapper {

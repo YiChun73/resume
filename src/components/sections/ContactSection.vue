@@ -49,13 +49,6 @@ const infoVisible = useInView(info)
 
         <div class="col-md-8">
           <form class="contact-form" novalidate @submit.prevent="onSubmit">
-            <div v-if="status === 'success'" class="alert alert-success" role="status">
-              {{ t('contact.success') }}
-            </div>
-            <div v-else-if="status === 'error'" class="alert alert-danger" role="alert">
-              {{ t('contact.error') }}
-            </div>
-
             <!-- Honeypot for Web3Forms spam filtering; hidden from humans. -->
             <input
               v-model="botcheck"
@@ -114,6 +107,26 @@ const infoVisible = useInView(info)
             <button type="submit" class="btn btn-default" :disabled="status === 'sending'">
               {{ status === 'sending' ? t('contact.sending') : t('contact.send') }}
             </button>
+
+            <!-- Live regions stay mounted so the message swapped into them is announced.
+                 From submit on, the hidden sizer holds the taller message's space, so the
+                 reply fills reserved space instead of pushing the content below. -->
+            <div class="form-status">
+              <div role="status">
+                <div v-if="status === 'success'" class="alert alert-success">
+                  {{ t('contact.success') }}
+                </div>
+              </div>
+              <div role="alert">
+                <div v-if="status === 'error'" class="alert alert-danger">
+                  {{ t('contact.error') }}
+                </div>
+              </div>
+              <div v-if="status !== 'idle'" class="form-status-sizer" aria-hidden="true">
+                <div class="alert">{{ t('contact.success') }}</div>
+                <div class="alert">{{ t('contact.error') }}</div>
+              </div>
+            </div>
           </form>
         </div>
       </div>
@@ -135,5 +148,23 @@ const infoVisible = useInView(info)
   @include media-down(md) {
     margin-bottom: 30px;
   }
+}
+
+// every child shares one grid cell: the cell is as tall as the tallest of them
+.form-status,
+.form-status-sizer {
+  display: grid;
+
+  > * {
+    grid-area: 1 / 1;
+  }
+}
+
+.form-status-sizer {
+  visibility: hidden;
+}
+
+.form-status .alert {
+  margin: 20px 0 0;
 }
 </style>
