@@ -2,6 +2,7 @@ import { fileURLToPath, URL } from 'node:url'
 
 import { defineConfig, loadEnv, type Plugin } from 'vite'
 import vue from '@vitejs/plugin-vue'
+import VueI18nPlugin from '@intlify/unplugin-vue-i18n/vite'
 
 import enNotFound from './src/i18n/locales/en-US/notFound'
 import zhNotFound from './src/i18n/locales/zh-TW/notFound'
@@ -117,13 +118,22 @@ function requireEnv(keys: readonly string[]): Plugin {
 // https://vite.dev/config/
 export default defineConfig({
   base: process.env.BASE_PATH || '/',
-  // vue-i18n feature flags: composition-only build, no dev warnings
+  // the one vue-i18n feature flag VueI18nPlugin leaves unset under Vite
   define: {
-    __VUE_I18N_FULL_INSTALL__: true,
-    __VUE_I18N_LEGACY_API__: false,
     __INTLIFY_PROD_DEVTOOLS__: false,
   },
-  plugins: [vue(), prePaintLocale(), notFoundPage(), requireEnv(['VITE_WEB3FORMS_ACCESS_KEY'])],
+  plugins: [
+    vue({ features: { optionsAPI: false } }),
+    // precompiles the locale messages and bundles the runtime-only vue-i18n
+    // build; also sets its feature flags (composition-only, full install)
+    VueI18nPlugin({
+      include: fileURLToPath(new URL('./src/i18n/locales/*/!(index).ts', import.meta.url)),
+      dropMessageCompiler: true,
+    }),
+    prePaintLocale(),
+    notFoundPage(),
+    requireEnv(['VITE_WEB3FORMS_ACCESS_KEY']),
+  ],
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
