@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { useTemplateRef } from 'vue'
-import { useI18n } from 'vue-i18n'
 
 import FactCard from '@/components/ui/FactCard.vue'
 import SectionTitle from '@/components/ui/SectionTitle.vue'
@@ -8,6 +7,7 @@ import SkillsList from '@/components/ui/SkillsList.vue'
 import { useInView } from '@/composables/useInView'
 import { facts } from '@/data/facts'
 import { profile } from '@/data/profile'
+import { useI18n } from '@/i18n/use-i18n'
 
 const { t } = useI18n()
 

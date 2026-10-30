@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { useTemplateRef } from 'vue'
-import { useI18n } from 'vue-i18n'
 
 import BlogCard from '@/components/ui/BlogCard.vue'
 import SectionTitle from '@/components/ui/SectionTitle.vue'
 import { useInView } from '@/composables/useInView'
 import { blogPosts } from '@/data/blog'
+import { useI18n } from '@/i18n/use-i18n'
 
 const { t } = useI18n()
 

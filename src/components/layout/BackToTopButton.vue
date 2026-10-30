@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { onBeforeUnmount, onMounted, ref } from 'vue'
-import { useI18n } from 'vue-i18n'
 
 import AppIcon from '@/components/ui/AppIcon.vue'
 import { useSmoothScroll } from '@/composables/useSmoothScroll'
+import { useI18n } from '@/i18n/use-i18n'
 
 const { t } = useI18n()
 const visible = ref(false)

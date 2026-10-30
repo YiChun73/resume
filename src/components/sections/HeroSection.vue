@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { useTemplateRef } from 'vue'
-import { useI18n } from 'vue-i18n'
 
 import SocialLinks from '@/components/ui/SocialLinks.vue'
 import { useMouseParallax } from '@/composables/useMouseParallax'
@@ -8,6 +7,7 @@ import { useSmoothScroll } from '@/composables/useSmoothScroll'
 import { useTextRotator } from '@/composables/useTextRotator'
 import { heroRoles, profile } from '@/data/profile'
 import { socialLinks } from '@/data/social'
+import { useI18n } from '@/i18n/use-i18n'
 
 const { t } = useI18n()
 

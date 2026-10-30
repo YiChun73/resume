@@ -1,5 +1,6 @@
 import { reactive, ref, type Ref } from 'vue'
-import { useI18n } from 'vue-i18n'
+
+import { useI18n } from '@/i18n/use-i18n'
 
 export interface ContactFormFields {
   name: string

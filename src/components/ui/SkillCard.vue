@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import { useI18n } from 'vue-i18n'
 
 import type { Skill } from '@/data/skills'
+import { useI18n } from '@/i18n/use-i18n'
 
 const props = defineProps<{
   skill: Skill

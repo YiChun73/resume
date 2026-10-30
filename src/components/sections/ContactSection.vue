@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { useTemplateRef } from 'vue'
-import { useI18n } from 'vue-i18n'
 
 import mapBackground from '@/assets/images/map.svg'
 import FormField from '@/components/ui/FormField.vue'
@@ -8,6 +7,7 @@ import SectionTitle from '@/components/ui/SectionTitle.vue'
 import { useContactForm } from '@/composables/useContactForm'
 import { useInView } from '@/composables/useInView'
 import { profile } from '@/data/profile'
+import { messageKey, useI18n } from '@/i18n/use-i18n'
 
 const { t } = useI18n()
 
@@ -33,7 +33,7 @@ const infoVisible = useInView(info)
               {{ t('contact.heading') }}
             </h3>
             <i18n-t
-              keypath="contact.intro"
+              :keypath="messageKey('contact.intro')"
               tag="p"
               scope="global"
               class="reveal"

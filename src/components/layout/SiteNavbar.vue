@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useI18n } from 'vue-i18n'
 
 import { useScrollSpy } from '@/composables/useScrollSpy'
 import { useSmoothScroll } from '@/composables/useSmoothScroll'
 import { navTargets, type NavTarget } from '@/data/navigation'
+import { useI18n } from '@/i18n/use-i18n'
 
 const { t } = useI18n()
 const menuOpen = ref(false)

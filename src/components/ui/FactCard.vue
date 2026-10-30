@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { toRef } from 'vue'
-import { useI18n } from 'vue-i18n'
 
 import AppIcon from '@/components/ui/AppIcon.vue'
 import { useCountUp } from '@/composables/useCountUp'
 import type { Fact } from '@/data/facts'
+import { useI18n } from '@/i18n/use-i18n'
 
 const props = defineProps<{
   fact: Fact

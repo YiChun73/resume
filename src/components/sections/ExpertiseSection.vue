@@ -1,10 +1,9 @@
 <script setup lang="ts">
-import { useI18n } from 'vue-i18n'
-
 import ExpertiseCard from '@/components/ui/ExpertiseCard.vue'
 import SectionTitle from '@/components/ui/SectionTitle.vue'
 import { useSmoothScroll } from '@/composables/useSmoothScroll'
 import { expertiseAreas } from '@/data/expertise'
+import { messageKey, useI18n } from '@/i18n/use-i18n'
 
 const { t } = useI18n()
 const { scrollToSection } = useSmoothScroll()
@@ -22,7 +21,7 @@ const { scrollToSection } = useSmoothScroll()
       </div>
 
       <div class="contact-note text-center">
-        <i18n-t keypath="expertise.note" tag="p" scope="global">
+        <i18n-t :keypath="messageKey('expertise.note')" tag="p" scope="global">
           <template #link>
             <a href="#contact" @click.prevent="scrollToSection('contact')">
               {{ t('expertise.noteLink') }}

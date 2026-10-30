@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { computed, useTemplateRef } from 'vue'
-import { useI18n } from 'vue-i18n'
 
 import SectionTitle from '@/components/ui/SectionTitle.vue'
 import TimelineItem, { type TimelineEntry } from '@/components/ui/TimelineItem.vue'
 import { useInView } from '@/composables/useInView'
 import { educationIds, workIds, type EducationId, type WorkId } from '@/data/experience'
+import { useI18n } from '@/i18n/use-i18n'
 
 const { t } = useI18n()
 

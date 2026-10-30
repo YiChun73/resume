@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import { useI18n } from 'vue-i18n'
-
 import type { BlogPost } from '@/data/blog'
+import { useI18n } from '@/i18n/use-i18n'
 
 defineProps<{
   post: BlogPost

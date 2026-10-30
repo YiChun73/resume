@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { computed, ref, useTemplateRef } from 'vue'
-import { useI18n } from 'vue-i18n'
 
 import AppLightbox from '@/components/ui/AppLightbox.vue'
 import PortfolioCard from '@/components/ui/PortfolioCard.vue'
 import SectionTitle from '@/components/ui/SectionTitle.vue'
 import { useInView } from '@/composables/useInView'
+import { useI18n } from '@/i18n/use-i18n'
 import {
   portfolioFilters,
   portfolioItems,
