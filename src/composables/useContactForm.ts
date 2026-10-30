@@ -12,10 +12,15 @@ export type SubmitStatus = 'idle' | 'sending' | 'success' | 'error'
 
 const WEB3FORMS_ENDPOINT = 'https://api.web3forms.com/submit'
 const WEB3FORMS_ACCESS_KEY = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY
+const SUBMIT_TIMEOUT_MS = 15_000
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
 const FIELDS = ['name', 'email', 'subject', 'message'] as const
+
+function isAcceptedSubmission(body: unknown): boolean {
+  return typeof body === 'object' && body !== null && 'success' in body && body.success === true
+}
 
 /**
  * State, validation and Web3Forms submission for the contact form;
@@ -70,10 +75,14 @@ export function useContactForm(): {
           subject: form.subject,
           message: form.message,
         }),
+        signal: AbortSignal.timeout(SUBMIT_TIMEOUT_MS),
       })
-      const result = (await response.json()) as { success?: boolean }
-      if (!response.ok || result.success !== true) {
+      if (!response.ok) {
         throw new Error(`Web3Forms rejected the submission (HTTP ${response.status})`)
+      }
+      const result: unknown = await response.json()
+      if (!isAcceptedSubmission(result)) {
+        throw new Error('Web3Forms did not confirm the submission')
       }
       status.value = 'success'
       form.name = ''
