@@ -21,10 +21,10 @@ export default {
   },
   dialog: {
     heading: 'Guest App Walkthrough Screens',
-    paragraphs: [
+    intro:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam hendrerit nibh in massa semper rutrum. In rhoncus eleifend mi id tempus.',
+    details:
       'Donec consectetur, libero at pretium euismod, nisl felis lobortis urna, id tristique nisl lectus eget ligula.',
-    ],
     cta: 'View on Dribbble',
   },
 }

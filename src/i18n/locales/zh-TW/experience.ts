@@ -1,38 +1,38 @@
 export default {
   title: '學經歷',
-  education: [
-    {
+  education: {
+    nchu: {
       period: '2014 - 2017',
       title: '國立中興大學 資訊管理學系',
       description: '轉學考入資管系，奠定程式設計與軟體工程基礎，並投入網頁前端開發。',
     },
-    {
+    ncyu: {
       period: '2013 - 2014',
       title: '國立嘉義大學 應用數學系',
       description: '主修應用數學，培養邏輯推理與問題拆解能力，後轉學至資訊管理領域。',
     },
-    {
+    tnssh: {
       period: '2010 - 2013',
       title: '國立臺南第二高級中學',
       description: '高中三年打下自然組學科基礎，開始接觸程式設計並產生興趣。',
     },
-  ],
-  work: [
-    {
+  },
+  work: {
+    fengcai: {
       period: '2023 - 至今',
       title: '資深前端工程師 · 風采有限公司',
       description: '主導前端架構規劃與開發規範，建置可重用的元件系統，並推動現代化工具鍊與程式碼品質標準落地。',
     },
-    {
+    nttData: {
       period: '2021 - 2023',
       title: '前端工程師 · 台灣恩悌悌數據股份有限公司',
       description: '投入企業級系統的前端開發，與跨團隊協作交付大型專案，持續優化介面效能與使用體驗。',
     },
-    {
+    fangdiwang: {
       period: '2020 - 2021',
       title: 'Web Developer · 房地王有限公司',
       description:
         '兩人工程團隊成員，橫跨前端、後端與 Android（Kotlin）App 開發，從需求討論到上線維運一手完成。',
     },
-  ],
+  },
 }

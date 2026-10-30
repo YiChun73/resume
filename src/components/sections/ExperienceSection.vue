@@ -5,20 +5,25 @@ import { useI18n } from 'vue-i18n'
 import SectionTitle from '@/components/ui/SectionTitle.vue'
 import TimelineItem, { type TimelineEntry } from '@/components/ui/TimelineItem.vue'
 import { useInView } from '@/composables/useInView'
+import { educationIds, workIds, type EducationId, type WorkId } from '@/data/experience'
 
-const { t, tm, rt } = useI18n()
+const { t } = useI18n()
 
-function localizeEntries(entries: TimelineEntry[]): TimelineEntry[] {
-  return entries.map((entry) => ({
-    period: rt(entry.period),
-    title: rt(entry.title),
-    description: rt(entry.description),
-  }))
+function timelineEntry(
+  key: `experience.education.${EducationId}` | `experience.work.${WorkId}`,
+): TimelineEntry {
+  return {
+    period: t(`${key}.period`),
+    title: t(`${key}.title`),
+    description: t(`${key}.description`),
+  }
 }
 
 // computed so the lists re-resolve when the locale changes
-const education = computed(() => localizeEntries(tm('experience.education')))
-const work = computed(() => localizeEntries(tm('experience.work')))
+const education = computed(() =>
+  educationIds.map((id) => timelineEntry(`experience.education.${id}`)),
+)
+const work = computed(() => workIds.map((id) => timelineEntry(`experience.work.${id}`)))
 
 const eduCard = useTemplateRef<HTMLDivElement>('eduCard')
 const expCard = useTemplateRef<HTMLDivElement>('expCard')

@@ -8,6 +8,9 @@ export interface Profile {
   email: string
 }
 
+// Hero rotator order; labels come from the `hero.roles` locale messages.
+export const heroRoles = ['designer', 'developer', 'photography'] as const
+
 export const profile: Profile = {
   avatarHero,
   avatarAbout,

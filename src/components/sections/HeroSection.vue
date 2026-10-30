@@ -6,13 +6,13 @@ import SocialLinks from '@/components/ui/SocialLinks.vue'
 import { useMouseParallax } from '@/composables/useMouseParallax'
 import { useSmoothScroll } from '@/composables/useSmoothScroll'
 import { useTextRotator } from '@/composables/useTextRotator'
-import { profile } from '@/data/profile'
+import { heroRoles, profile } from '@/data/profile'
 import { socialLinks } from '@/data/social'
 
-const { t, tm, rt } = useI18n()
+const { t } = useI18n()
 
 const scene = useTemplateRef<HTMLElement>('scene')
-const role = useTextRotator(tm('hero.roles').map((phrase) => rt(phrase)))
+const role = useTextRotator(heroRoles.map((id) => t(`hero.roles.${id}`)))
 const { scrollToSection } = useSmoothScroll()
 
 useMouseParallax(scene)

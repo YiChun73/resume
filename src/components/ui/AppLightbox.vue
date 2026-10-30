@@ -13,7 +13,7 @@ const emit = defineEmits<{
   close: []
 }>()
 
-const { t, tm, rt } = useI18n()
+const { t } = useI18n()
 
 const dialog = useTemplateRef<HTMLDivElement>('dialog')
 const closeButton = useTemplateRef<HTMLButtonElement>('closeButton')
@@ -26,8 +26,6 @@ const title = computed(() => (props.item ? t(`portfolio.items.${props.item.slug}
 const galleryImages = computed(() =>
   media.value?.type === 'gallery' ? media.value.images : [],
 )
-
-const dialogParagraphs = computed(() => tm('portfolio.dialog.paragraphs').map((p) => rt(p)))
 
 function next(): void {
   if (!galleryImages.value.length) return
@@ -160,7 +158,8 @@ onBeforeUnmount(() => {
           <div v-else-if="media.type === 'inline'" class="white-popup">
             <img :src="media.image" :alt="t('portfolio.dialog.heading')" />
             <h2>{{ t('portfolio.dialog.heading') }}</h2>
-            <p v-for="paragraph in dialogParagraphs" :key="paragraph">{{ paragraph }}</p>
+            <p>{{ t('portfolio.dialog.intro') }}</p>
+            <p>{{ t('portfolio.dialog.details') }}</p>
             <a :href="media.ctaUrl" class="btn btn-default" target="_blank" rel="noopener">
               {{ t('portfolio.dialog.cta') }}
             </a>
