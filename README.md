@@ -11,4 +11,4 @@ The contact section submits through [Web3Forms](https://web3forms.com) (no backe
 1. Go to <https://web3forms.com>, enter the inbox address that should receive messages, and copy the access key sent to you.
 2. Paste it into `.env` as `VITE_WEB3FORMS_ACCESS_KEY`.
 
-The access key is public by design (it only identifies the receiving inbox), so `.env` is committed and the key ships in the client bundle. Until a real key is configured, submitting the form shows the error alert.
+The access key is public by design (it only identifies the receiving inbox), so `.env` is committed and the key ships in the client bundle. The dev server and the build fail if the key is missing or empty.

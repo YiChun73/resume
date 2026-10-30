@@ -1,6 +1,6 @@
 import { fileURLToPath, URL } from 'node:url'
 
-import { defineConfig, type Plugin } from 'vite'
+import { defineConfig, loadEnv, type Plugin } from 'vite'
 import vue from '@vitejs/plugin-vue'
 
 import enNotFound from './src/i18n/locales/en-US/notFound'
@@ -100,6 +100,20 @@ function notFoundHtml(base: string): string {
 `
 }
 
+/** Fails the dev server and the build when a required env variable is missing or empty. */
+function requireEnv(keys: readonly string[]): Plugin {
+  return {
+    name: 'require-env',
+    configResolved(config) {
+      const env = loadEnv(config.mode, config.envDir, config.envPrefix)
+      const missing = keys.filter((key) => !env[key])
+      if (missing.length > 0) {
+        throw new Error(`Missing required environment variables: ${missing.join(', ')}`)
+      }
+    },
+  }
+}
+
 // https://vite.dev/config/
 export default defineConfig({
   base: process.env.BASE_PATH || '/',
@@ -109,7 +123,7 @@ export default defineConfig({
     __VUE_I18N_LEGACY_API__: false,
     __INTLIFY_PROD_DEVTOOLS__: false,
   },
-  plugins: [vue(), prePaintLocale(), notFoundPage()],
+  plugins: [vue(), prePaintLocale(), notFoundPage(), requireEnv(['VITE_WEB3FORMS_ACCESS_KEY'])],
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),

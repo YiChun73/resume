@@ -28,8 +28,8 @@ scratchpad and run a plain `.mjs` script with `node` (ESM ignores
 - Contact form (`#contact`): submits to Web3Forms
   (`api.web3forms.com/submit`). Mock it with `page.route()` — 200
   `{success:true}` for the success path, 400/abort for error paths.
-  With the placeholder key in `.env`, code short-circuits to the error
-  alert without any network call (by design).
+  `.env` holds the real key, so always mock it: an unmocked submission
+  emails the real inbox.
 - Locale: strings come from `src/i18n/locales/{zh-TW,en-US}`; default
   locale depends on browser language, Playwright defaults to en-US.
 

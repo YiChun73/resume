@@ -59,9 +59,6 @@ export function useContactForm(): {
 
     status.value = 'sending'
     try {
-      if (!WEB3FORMS_ACCESS_KEY || WEB3FORMS_ACCESS_KEY === 'REPLACE_WITH_YOUR_ACCESS_KEY') {
-        throw new Error('VITE_WEB3FORMS_ACCESS_KEY is not configured')
-      }
       const response = await fetch(WEB3FORMS_ENDPOINT, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
