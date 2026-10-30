@@ -34,17 +34,12 @@ function filterLabel(filter: PortfolioCategory | null): string {
   return filter ? t(`portfolio.categories.${filter}`) : t('portfolio.filterAll')
 }
 
-let opener: HTMLElement | null = null
-
 function openLightbox(item: PortfolioItem): void {
-  opener = document.activeElement instanceof HTMLElement ? document.activeElement : null
   lightboxItem.value = item
 }
 
 function closeLightbox(): void {
   lightboxItem.value = null
-  opener?.focus()
-  opener = null
 }
 
 function onSelectFilter(event: Event): void {

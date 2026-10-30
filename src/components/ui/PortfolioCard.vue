@@ -73,7 +73,7 @@ const externalUrl = computed(() =>
   border: 0;
 
   &:focus-visible {
-    outline: 2px solid var(--color-secondary);
+    outline: 2px solid var(--color-focus-ring);
     outline-offset: 4px;
     border-radius: var(--radius-card);
   }

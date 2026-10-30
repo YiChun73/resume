@@ -13,13 +13,7 @@
   transition: var(--transition-base);
 
   &:focus {
-    outline: 0;
     box-shadow: none;
-  }
-
-  &:focus-visible {
-    outline: 2px solid var(--color-secondary);
-    outline-offset: 2px;
   }
 
   &:disabled {

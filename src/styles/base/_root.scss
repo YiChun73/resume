@@ -24,6 +24,7 @@
   --color-card-pink: #f97b8b;
 
   --color-border-on-dark: rgba(255, 255, 255, 0.1);
+  --color-focus-ring: var(--color-secondary); // dark surfaces switch it to --color-yellow
 
   // Shadows
   --shadow-card: 0px 5px 20px 0px rgba(69, 67, 96, 0.1);

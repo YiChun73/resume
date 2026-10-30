@@ -19,6 +19,7 @@ const { t } = useI18n()
 
 <style scoped lang="scss">
 .not-found {
+  --color-focus-ring: var(--color-yellow);
   background: var(--color-dark);
   // full-screen like the hero: reset the global section padding and let the
   // fixed navbar overlay; dvh tracks the collapsing mobile URL bar

@@ -56,7 +56,7 @@ onBeforeUnmount(() => window.removeEventListener('scroll', onScroll))
   }
 
   &:focus-visible {
-    outline: 2px solid var(--color-secondary);
+    outline: 2px solid var(--color-focus-ring);
   }
 }
 

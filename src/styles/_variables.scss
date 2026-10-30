@@ -16,5 +16,11 @@ $container-sm: 540px;
 $container-md: 920px;
 $container-xxl: 1080px;
 
-// Height of the fixed top navbar (20px padding * 2 + 33px logo + 1px border).
-$navbar-height: 74px;
+// Fixed top navbar geometry, shared by SiteNavbar and every clearance below it.
+// Below lg the 40px toggler, not the 33px brand, sets the row height.
+$navbar-padding-y: 20px;
+$navbar-border-width: 1px;
+$navbar-brand-line-height: 33px;
+$navbar-toggler-height: 40px;
+$navbar-height: $navbar-padding-y * 2 + $navbar-brand-line-height + $navbar-border-width;
+$navbar-height-collapsed: $navbar-padding-y * 2 + $navbar-toggler-height + $navbar-border-width;

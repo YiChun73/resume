@@ -71,9 +71,10 @@ function onNavClick(target: NavTarget): void {
 
 <style scoped lang="scss">
 .site-header {
+  --color-focus-ring: var(--color-yellow);
   background: var(--color-dark);
-  padding: 20px 0;
-  border-bottom: solid 1px var(--color-border-on-dark);
+  padding: $navbar-padding-y 0;
+  border-bottom: solid $navbar-border-width var(--color-border-on-dark);
   position: fixed;
   top: 0;
   right: 0;
@@ -94,7 +95,7 @@ function onNavClick(target: NavTarget): void {
   color: #fff;
   font-size: 36px;
   font-weight: 700;
-  line-height: 33px;
+  line-height: $navbar-brand-line-height;
 }
 
 // Matches the reference logo's period: a 6.6px rounded square sitting on the baseline.
@@ -109,12 +110,13 @@ function onNavClick(target: NavTarget): void {
 
 .navbar-toggler {
   display: none;
+  height: $navbar-toggler-height;
   padding: 4px 10px;
   border: 1px solid var(--color-border-on-dark);
   border-radius: 4px;
 
   &:focus-visible {
-    outline: 2px solid var(--color-yellow);
+    outline: 2px solid var(--color-focus-ring);
   }
 }
 
@@ -144,19 +146,27 @@ function onNavClick(target: NavTarget): void {
     display: block;
   }
 
+  // Collapsed links are visibility: hidden, so they leave the tab order and
+  // the accessibility tree; the grid row grows to the menu's real height.
   .navbar-menu {
     flex-basis: 100%;
-    overflow: hidden;
-    max-height: 0;
-    transition: max-height 0.35s ease;
+    display: grid;
+    grid-template-rows: 0fr;
+    visibility: hidden;
+    transition:
+      grid-template-rows 0.35s ease,
+      visibility 0.35s;
 
     &.is-open {
-      max-height: 320px;
+      grid-template-rows: 1fr;
+      visibility: visible;
     }
   }
 
   .navbar-nav {
     display: block;
+    min-height: 0;
+    overflow: hidden;
 
     li:not(:last-child) {
       padding-right: 0;

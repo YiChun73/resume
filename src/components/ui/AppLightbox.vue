@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, nextTick, onBeforeUnmount, ref, useTemplateRef, watch } from 'vue'
+import { computed, onBeforeUnmount, ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 
 import AppIcon from '@/components/ui/AppIcon.vue'
@@ -15,9 +15,8 @@ const emit = defineEmits<{
 
 const { t } = useI18n()
 
-const dialog = useTemplateRef<HTMLDivElement>('dialog')
-const closeButton = useTemplateRef<HTMLButtonElement>('closeButton')
 const galleryIndex = ref(0)
+let returnFocusTo: HTMLElement | null = null
 
 const media = computed(() => props.item?.media ?? null)
 
@@ -38,70 +37,57 @@ function previous(): void {
     (galleryIndex.value - 1 + galleryImages.value.length) % galleryImages.value.length
 }
 
-function trapFocus(event: KeyboardEvent): void {
-  if (!dialog.value) return
-  const focusables = Array.from(
-    dialog.value.querySelectorAll<HTMLElement>(
-      'a[href], button, iframe, [tabindex]:not([tabindex="-1"])',
-    ),
-  )
-  const first = focusables[0]
-  const last = focusables[focusables.length - 1]
-  if (!first || !last) return
-  if (event.shiftKey && document.activeElement === first) {
-    event.preventDefault()
-    last.focus()
-  } else if (!event.shiftKey && document.activeElement === last) {
-    event.preventDefault()
-    first.focus()
-  }
-}
-
 function onKeydown(event: KeyboardEvent): void {
-  if (event.key === 'Escape') emit('close')
   if (event.key === 'ArrowRight') next()
   if (event.key === 'ArrowLeft') previous()
-  if (event.key === 'Tab') trapFocus(event)
+}
+
+// showModal() makes the rest of the page inert, reports Escape as `cancel`
+// and focuses the autofocus close button.
+function onEnter(el: Element): void {
+  if (!(el instanceof HTMLDialogElement)) return
+  returnFocusTo = document.activeElement instanceof HTMLElement ? document.activeElement : null
+  el.showModal()
+}
+
+// Closed as the leave transition starts, so the page is interactive again
+// (and can take focus back) while the overlay fades out.
+function onLeave(el: Element): void {
+  if (!(el instanceof HTMLDialogElement)) return
+  el.inert = true
+  el.close()
+  returnFocusTo?.focus()
+  returnFocusTo = null
 }
 
 watch(
   () => props.item,
-  async (item) => {
+  (item) => {
     galleryIndex.value = 0
-    if (item) {
-      document.body.style.overflow = 'hidden'
-      document.addEventListener('keydown', onKeydown)
-      await nextTick()
-      closeButton.value?.focus()
-    } else {
-      document.body.style.overflow = ''
-      document.removeEventListener('keydown', onKeydown)
-    }
+    document.body.style.overflow = item ? 'hidden' : ''
   },
 )
 
 onBeforeUnmount(() => {
   document.body.style.overflow = ''
-  document.removeEventListener('keydown', onKeydown)
 })
 </script>
 
 <template>
   <Teleport to="body">
-    <Transition name="lightbox">
-      <div
+    <Transition name="lightbox" @enter="onEnter" @leave="onLeave">
+      <dialog
         v-if="item && media"
-        ref="dialog"
         class="lightbox"
-        role="dialog"
-        aria-modal="true"
         :aria-label="title"
+        @cancel.prevent="emit('close')"
         @click.self="emit('close')"
+        @keydown="onKeydown"
       >
         <button
-          ref="closeButton"
           class="lightbox-close"
           type="button"
+          autofocus
           :aria-label="t('common.closeDialog')"
           @click="emit('close')"
         >
@@ -165,22 +151,36 @@ onBeforeUnmount(() => {
             </a>
           </div>
         </div>
-      </div>
+      </dialog>
     </Transition>
   </Teleport>
 </template>
 
 <style scoped lang="scss">
 .lightbox {
+  --color-focus-ring: var(--color-yellow);
   position: fixed;
   inset: 0;
   z-index: 1043;
+  // reset the UA <dialog> box so it covers the viewport like an overlay
+  width: auto;
+  height: auto;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  border: 0;
+  overflow: visible;
+  color: inherit;
   background: rgba(11, 11, 11, 0.8);
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 20px;
   transition: opacity 0.3s ease-out;
+
+  &::backdrop {
+    background: transparent;
+  }
 }
 
 .lightbox-close {
@@ -273,6 +273,7 @@ onBeforeUnmount(() => {
 }
 
 .white-popup {
+  --color-focus-ring: var(--color-secondary);
   background: #fff;
   border-radius: 25px;
   padding: 30px;

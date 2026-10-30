@@ -1,3 +1,6 @@
+@use '../variables' as *;
+@use '../mixins' as *;
+
 body {
   color: var(--color-text);
   background-color: var(--color-bg);
@@ -43,11 +46,24 @@ p {
 
 a {
   color: var(--color-primary);
-  outline: 0;
   transition: var(--transition-base);
 
   &:hover {
     color: var(--color-dark);
+  }
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: 2px;
+}
+
+// keeps focused and scrolled-to targets clear of the fixed navbar
+html {
+  scroll-padding-top: $navbar-height + 16px;
+
+  @include media-down(lg) {
+    scroll-padding-top: $navbar-height-collapsed + 16px;
   }
 }
 

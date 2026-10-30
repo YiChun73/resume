@@ -107,6 +107,7 @@ useMouseParallax(scene)
 
 <style scoped lang="scss">
 .home {
+  --color-focus-ring: var(--color-yellow);
   background: var(--color-dark);
   padding: 0;
   // fixed height like the reference, so the parallax percentages always
