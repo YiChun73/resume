@@ -11,7 +11,7 @@ import { useI18n } from '@/i18n/use-i18n'
 
 const { t } = useI18n()
 
-const factsRow = useTemplateRef<HTMLDivElement>('factsRow')
+const factsRow = useTemplateRef('factsRow')
 const factsVisible = useInView(factsRow)
 </script>
 

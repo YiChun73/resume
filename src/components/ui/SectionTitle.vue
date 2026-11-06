@@ -7,7 +7,7 @@ defineProps<{
   title: string
 }>()
 
-const heading = useTemplateRef<HTMLHeadingElement>('heading')
+const heading = useTemplateRef('heading')
 const isInView = useInView(heading)
 </script>
 

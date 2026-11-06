@@ -21,7 +21,7 @@ const activeFilter = ref<PortfolioCategory | null>(null)
 const allLoaded = ref(false)
 const lightboxItem = ref<PortfolioItem | null>(null)
 
-const filterBar = useTemplateRef<HTMLUListElement>('filterBar')
+const filterBar = useTemplateRef('filterBar')
 const filterVisible = useInView(filterBar)
 
 const filteredItems = computed(() => {

@@ -11,7 +11,7 @@ import { useI18n } from '@/i18n/use-i18n'
 
 const { t } = useI18n()
 
-const scene = useTemplateRef<HTMLElement>('scene')
+const scene = useTemplateRef('scene')
 const role = useTextRotator(heroRoles.map((id) => t(`hero.roles.${id}`)))
 const { scrollToSection } = useSmoothScroll()
 

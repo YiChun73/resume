@@ -25,8 +25,8 @@ const education = computed(() =>
 )
 const work = computed(() => workIds.map((id) => timelineEntry(`experience.work.${id}`)))
 
-const eduCard = useTemplateRef<HTMLDivElement>('eduCard')
-const expCard = useTemplateRef<HTMLDivElement>('expCard')
+const eduCard = useTemplateRef('eduCard')
+const expCard = useTemplateRef('expCard')
 const eduVisible = useInView(eduCard)
 const expVisible = useInView(expCard)
 </script>

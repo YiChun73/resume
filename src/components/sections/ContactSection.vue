@@ -13,7 +13,7 @@ const { t } = useI18n()
 
 const { form, errors, status, botcheck, onSubmit } = useContactForm()
 
-const info = useTemplateRef<HTMLDivElement>('info')
+const info = useTemplateRef('info')
 const infoVisible = useInView(info)
 </script>
 

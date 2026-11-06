@@ -1,6 +1,6 @@
 <script lang="ts">
 // Module scope: the registry is built once, not per icon instance.
-const modules = import.meta.glob<string>('@/assets/icons/*.svg', {
+const modules = import.meta.glob('@/assets/icons/*.svg', {
   query: '?raw',
   import: 'default',
   eager: true,

@@ -9,7 +9,7 @@ import { useI18n } from '@/i18n/use-i18n'
 
 const { t } = useI18n()
 
-const grid = useTemplateRef<HTMLDivElement>('grid')
+const grid = useTemplateRef('grid')
 const isInView = useInView(grid)
 </script>
 
