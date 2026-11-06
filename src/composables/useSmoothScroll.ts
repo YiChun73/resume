@@ -1,3 +1,4 @@
+import type { NavTarget } from '@/data/navigation'
 import { prefersReducedMotion } from '@/utils/prefers-reduced-motion'
 
 function easeInOutQuad(t: number): number {
@@ -27,10 +28,10 @@ function animateScrollTo(targetY: number, duration: number): void {
  * (800ms ease-in-out to sections, 400ms back to top).
  */
 export function useSmoothScroll(): {
-  scrollToSection: (id: string) => void
+  scrollToSection: (id: NavTarget) => void
   scrollToTop: () => void
 } {
-  function scrollToSection(id: string): void {
+  function scrollToSection(id: NavTarget): void {
     const el = document.getElementById(id)
     if (!el) return
     animateScrollTo(el.getBoundingClientRect().top + window.scrollY, 800)
