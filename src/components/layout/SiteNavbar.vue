@@ -7,6 +7,7 @@ import { navTargets, type NavTarget } from '@/data/navigation'
 import { useI18n } from '@/i18n/use-i18n'
 
 const { t } = useI18n()
+const homeHref = import.meta.env.BASE_URL
 const menuOpen = ref(false)
 const { scrollToSection } = useSmoothScroll()
 const activeId = useScrollSpy([...navTargets])
@@ -23,7 +24,7 @@ function onNavClick(target: NavTarget): void {
       <nav class="navbar" :aria-label="t('common.mainNav')">
         <a
           class="navbar-brand"
-          href="/"
+          :href="homeHref"
           :aria-label="t('nav.brandHome')"
           @click.prevent="onNavClick('home')"
         >
