@@ -3,7 +3,7 @@ import { onBeforeUnmount, onMounted, type Ref } from 'vue'
 import { prefersReducedMotion } from '@/utils/prefers-reduced-motion'
 
 interface ParallaxLayer {
-  el: HTMLElement
+  el: HTMLElement | SVGElement
   depth: number
   x: number
   y: number
@@ -58,12 +58,14 @@ export function useMouseParallax(scene: Readonly<Ref<HTMLElement | null>>): void
   onMounted(() => {
     if (!scene.value) return
     if (prefersReducedMotion()) return
-    layers = Array.from(scene.value.querySelectorAll<HTMLElement>('[data-depth]')).map((el) => ({
-      el,
-      depth: Number(el.dataset.depth ?? 0),
-      x: 0,
-      y: 0,
-    }))
+    layers = Array.from(scene.value.querySelectorAll('[data-depth]'))
+      .filter((el) => el instanceof HTMLElement || el instanceof SVGElement)
+      .map((el) => ({
+        el,
+        depth: Number(el.dataset.depth ?? 0),
+        x: 0,
+        y: 0,
+      }))
     window.addEventListener('pointermove', onPointerMove, { passive: true })
   })
 
